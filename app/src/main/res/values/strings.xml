@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyCardApp</string>
+    <string name="send_message_btn">Send Message</string>
+</resources>
