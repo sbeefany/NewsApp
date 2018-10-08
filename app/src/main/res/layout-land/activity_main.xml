@@ -5,20 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".MainActivity">
+    tools:context=".AboutActivity">
 
 
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="258dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        tools:src="@drawable/avatarka" />
 
-        <ImageView
-            android:id="@+id/header"
-            android:layout_width="258dp"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/avatarka" />
-<ScrollView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_toRightOf="@id/header">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/header"
+        android:layout_toRightOf="@id/header">
 
         <LinearLayout
             android:id="@+id/main_block"
@@ -33,7 +35,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_person_black_24dp"
-                android:text="Имя:Александр"
+                android:drawableStart="@drawable/ic_person_black_24dp"
+                android:text="@string/example_name"
                 android:textSize="@dimen/text_size" />
 
             <View
@@ -46,7 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_between_comonents"
                 android:drawableLeft="@drawable/ic_mood_black_24dp"
-                android:text="Характер:экстраверт"
+                android:drawableStart="@drawable/ic_mood_black_24dp"
+                android:text="@string/example_mood"
                 android:textSize="@dimen/text_size" />
 
             <View
@@ -59,7 +63,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_between_comonents"
                 android:drawableLeft="@drawable/ic_cake_black_24dp"
-                android:text="День рождения:4 марта 1999"
+                android:drawableStart="@drawable/ic_cake_black_24dp"
+                android:text="@string/example_birth"
                 android:textSize="@dimen/text_size" />
 
             <View
@@ -71,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_between_comonents"
-                android:text="О себе: Я Блинов Александр.Учусь в МИСИС,перешел только лишь на второй курс,сам не знаю почему,но уверен,Что хочу двигаться дальше в андроид разработке.На данной момент хочу найти стажировку,вот так вот,и да мне 19 лет,молодой амбициозный парень=)"
+                android:text="@string/example_about_person"
                 android:textSize="@dimen/text_size" />
 
             <View
@@ -80,12 +85,14 @@
                 android:background="@color/black" />
 
             <EditText
+                android:id="@+id/message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Введите свое сообщение"
+                android:hint="@string/hint_for_message"
                 android:textSize="@dimen/text_size" />
 
             <Button
+                android:id="@+id/send_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -93,19 +100,20 @@
                 android:text="@string/send_message_btn"
                 android:textColor="@color/red"
                 android:textStyle="bold" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_margin="@dimen/margin_between_comonents">
+                android:layout_margin="@dimen/margin_between_comonents"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/vk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/vk"
-                    android:layout_marginRight="@dimen/margin_between_comonents"/>
+                    android:layout_marginRight="@dimen/margin_between_comonents"
+                    android:src="@drawable/vk" />
 
                 <ImageView
                     android:id="@+id/twitter"
@@ -114,8 +122,7 @@
                     android:src="@drawable/twitter" />
             </LinearLayout>
         </LinearLayout>
-</ScrollView>
+    </ScrollView>
 
 
-
-    </RelativeLayout>
+</RelativeLayout>
