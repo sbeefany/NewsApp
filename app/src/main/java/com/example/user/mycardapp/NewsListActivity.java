@@ -16,49 +16,48 @@ import com.example.user.mycardapp.Data.NewsItem;
 import java.util.ArrayList;
 
 public class NewsListActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    Adapter adapter;
-
+    private Adapter adapter;
+    private RecyclerView recyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_list);
-        initViews();
-        initRecycler();
+    protected void onCreate ( Bundle savedInstanceState ) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_news_list );
+        initViews ();
+        initRecycler ();
 
     }
 
-    private void initRecycler() {
-        adapter = new Adapter((ArrayList<NewsItem>) DataUtils.generateNews(), this);
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(layoutManager);
+    private void initRecycler () {
+        adapter = new Adapter ( ( ArrayList <NewsItem> ) DataUtils.generateNews () , this );
+        if ( getResources ().getConfiguration ().orientation == Configuration.ORIENTATION_PORTRAIT ) {
+            LinearLayoutManager layoutManager = new LinearLayoutManager ( this );
+            recyclerView.setLayoutManager ( layoutManager );
         } else {
-            GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-            recyclerView.setLayoutManager(layoutManager);
+            GridLayoutManager layoutManager = new GridLayoutManager ( this , 2 );
+            recyclerView.setLayoutManager ( layoutManager );
         }
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter ( adapter );
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_option, menu);
+    public boolean onCreateOptionsMenu ( Menu menu ) {
+        getMenuInflater ().inflate ( R.menu.menu_option , menu );
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+    public boolean onOptionsItemSelected ( MenuItem item ) {
+        switch ( item.getItemId () ) {
             case R.id.about_activity:
-                startActivity(new Intent(this, AboutActivity.class));
+                startActivity ( new Intent ( this , AboutActivity.class ) );
             default:
-                return super.onOptionsItemSelected(item);
+                return super.onOptionsItemSelected ( item );
         }
 
     }
 
-    private void initViews() {
-        recyclerView = findViewById(R.id.news_list);
+    private void initViews () {
+        recyclerView = findViewById ( R.id.news_list );
     }
 }

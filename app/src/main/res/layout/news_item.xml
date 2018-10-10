@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    android:id="@+id/card_view"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/outside_margin">
@@ -12,14 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
         <ImageView
             android:id="@+id/image"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="@dimen/half_standart_margin"
-            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -30,60 +28,61 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/half_standart_margin"
-            android:textSize="@dimen/text_size"
             android:maxLines="1"
+            android:textSize="@dimen/text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description"
-            tools:text="@tools:sample/date/mmddyy"/>
+            tools:text="@tools:sample/date/mmddyy" />
 
         <TextView
             android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/half_standart_margin"
+            android:layout_marginLeft="@dimen/half_standart_margin"
             android:layout_marginRight="@dimen/half_standart_margin"
             android:layout_marginStart="@dimen/half_standart_margin"
-            android:layout_marginLeft="@dimen/half_standart_margin"
             android:layout_marginTop="@dimen/half_standart_margin"
-            android:textSize="@dimen/text_size"
             android:maxLines="4"
+            android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toStartOf="@+id/image"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title"
-            tools:text="@tools:sample/lorem/random"/>
+            tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/half_standart_margin"
+            android:layout_marginLeft="@dimen/half_standart_margin"
             android:layout_marginRight="@dimen/half_standart_margin"
             android:layout_marginStart="@dimen/half_standart_margin"
-            android:layout_marginLeft="@dimen/half_standart_margin"
             android:layout_marginTop="@dimen/half_standart_margin"
-            android:textSize="@dimen/text_size"
             android:maxLines="1"
+            android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toStartOf="@+id/image"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/category"
-            tools:text="@tools:sample/lorem/random"/>
+            tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/half_standart_margin"
             android:layout_marginLeft="@dimen/half_standart_margin"
+            android:layout_marginStart="@dimen/half_standart_margin"
             android:layout_marginTop="@dimen/half_standart_margin"
-            android:textSize="@dimen/text_size"
             android:maxLines="1"
+            android:textSize="@dimen/text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/cities"/>
+            tools:text="@tools:sample/cities" />
     </android.support.constraint.ConstraintLayout>
+
 </android.support.v7.widget.CardView>
