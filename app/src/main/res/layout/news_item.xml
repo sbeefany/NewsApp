@@ -17,6 +17,7 @@
             android:layout_height="128dp"
             android:layout_margin="@dimen/half_standart_margin"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/poster_for_news"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +83,7 @@
             android:textSize="@dimen/text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded"
             tools:text="@tools:sample/cities" />
     </android.support.constraint.ConstraintLayout>
 

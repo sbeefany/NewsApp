@@ -16,7 +16,6 @@ import com.example.user.mycardapp.Data.NewsItem;
 import java.util.ArrayList;
 
 public class NewsListActivity extends AppCompatActivity {
-    private Adapter adapter;
     private RecyclerView recyclerView;
 
     @Override
@@ -29,7 +28,7 @@ public class NewsListActivity extends AppCompatActivity {
     }
 
     private void initRecycler () {
-        adapter = new Adapter ( ( ArrayList <NewsItem> ) DataUtils.generateNews () , this );
+        Adapter adapter = new Adapter ( ( ArrayList <NewsItem> ) DataUtils.generateNews () , this );
         if ( getResources ().getConfiguration ().orientation == Configuration.ORIENTATION_PORTRAIT ) {
             LinearLayoutManager layoutManager = new LinearLayoutManager ( this );
             recyclerView.setLayoutManager ( layoutManager );

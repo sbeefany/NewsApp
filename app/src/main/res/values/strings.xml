@@ -10,4 +10,8 @@
     <string name="error_no_email_app">Sorry...</string>
     <string name="error_no_browser_app">Sorry...You don\'t have browser</string>
     <string name="about_activity">About activity</string>
+    <string name="content_description_for_my_photo">Это моя фотография</string>
+    <string name="vk">vk</string>
+    <string name="twitter">twitter</string>
+    <string name="poster_for_news">Постер</string>
 </resources>

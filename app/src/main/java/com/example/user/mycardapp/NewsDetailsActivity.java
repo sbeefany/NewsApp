@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class NewsDetailsActivity extends AppCompatActivity {
     private String title;
@@ -68,6 +69,6 @@ public class NewsDetailsActivity extends AppCompatActivity {
     }
 
     private void initToolBar () {
-        getSupportActionBar ().setTitle ( category );
+        Objects.requireNonNull ( getSupportActionBar () ).setTitle ( category );
     }
 }

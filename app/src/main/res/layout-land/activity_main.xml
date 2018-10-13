@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,6 +12,7 @@
         android:layout_width="258dp"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/content_description_for_my_photo"
         android:scaleType="centerCrop"
         tools:src="@drawable/avatarka" />
 
@@ -18,7 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/header"
-        android:layout_toRightOf="@id/header">
+        android:layout_toRightOf="@id/header"
+        tools:ignore="RtlHardcoded">
 
         <LinearLayout
             android:id="@+id/main_block"
@@ -87,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_for_message"
+                android:inputType="text"
                 android:textSize="@dimen/text_size" />
 
             <Button
@@ -111,12 +115,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_between_comonents"
+                    android:contentDescription="@string/vk"
                     android:src="@drawable/vk" />
 
                 <ImageView
                     android:id="@+id/twitter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/twitter"
                     android:src="@drawable/twitter" />
 
             </LinearLayout>

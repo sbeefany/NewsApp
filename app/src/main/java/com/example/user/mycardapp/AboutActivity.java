@@ -3,6 +3,7 @@ package com.example.user.mycardapp;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -49,7 +50,7 @@ public class AboutActivity extends AppCompatActivity {
 
     }
 
-    private void openWeb ( String url ) {
+    private void openWeb ( @NonNull String url ) {
         Intent webIntent = new Intent ( Intent.ACTION_VIEW );
         webIntent.setData ( Uri.parse ( url ) );
         if ( webIntent.resolveActivity ( getPackageManager () ) != null ) {
@@ -59,7 +60,7 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
-    private void sendEmail ( String message ) {
+    private void sendEmail ( @NonNull String message ) {
         Intent intent = new Intent ( Intent.ACTION_SENDTO );
         intent.setData ( Uri.parse ( MAILTO ) );
         intent.putExtra ( Intent.EXTRA_EMAIL , EMAIL_ADDRESS );
@@ -79,7 +80,7 @@ public class AboutActivity extends AppCompatActivity {
         twitter = findViewById ( R.id.twitter );
     }
 
-    private void showMessage ( String message ) {
+    private void showMessage ( @NonNull String message ) {
         Toast.makeText ( this , message , Toast.LENGTH_LONG ).show ();
     }
 }
