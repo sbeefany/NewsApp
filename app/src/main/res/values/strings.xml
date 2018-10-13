@@ -1,4 +1,17 @@
 <resources>
-    <string name="app_name">MyCardApp</string>
+    <string name="app_name">AboutActivity</string>
     <string name="send_message_btn">Send Message</string>
+    <string name="example_name">Имя:Александр</string>
+    <string name="example_mood">Характер:экстраверт</string>
+    <string name="example_birth">День рождения:4 марта 1999</string>
+    <string name="example_about_person">О себе: Я Блинов Александр.Учусь в МИСИС,перешел только лишь на второй курс,сам не знаю почему,но уверен,Что хочу двигаться дальше в андроид разработке.На данной момент хочу найти стажировку,вот так вот,и да мне 19 лет,молодой амбициозный парень=)</string>
+    <string name="hint_for_message">Введите свое сообщение</string>
+    <string name="email_subject">Hello, I\'m you</string>
+    <string name="error_no_email_app">Sorry...</string>
+    <string name="error_no_browser_app">Sorry...You don\'t have browser</string>
+    <string name="about_activity">About activity</string>
+    <string name="content_description_for_my_photo">Это моя фотография</string>
+    <string name="vk">vk</string>
+    <string name="twitter">twitter</string>
+    <string name="poster_for_news">Постер</string>
 </resources>

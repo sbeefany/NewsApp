@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="outside_margin">16dp</dimen>
-    <dimen name="margin">8dp</dimen>
-    <dimen name="padding">8dp</dimen>
-    <dimen name="text_size">16sp</dimen>
-    <dimen name="margin_between_comonents">8dp</dimen>
-    <dimen name="line_size">1dp</dimen>
-</resources>

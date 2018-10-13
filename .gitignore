@@ -32,4 +32,9 @@ proguard/
 captures/
 
 #.idea
-./idea
+*.idea/
+
+#.iml
+*.iml
+
+
