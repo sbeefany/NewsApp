@@ -1,4 +1,4 @@
-package com.example.user.mycardapp;
+package com.example.user.mycardapp.Presentation.Activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.user.mycardapp.R;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class NewsDetailsActivity extends AppCompatActivity {
+
     private String title;
     private String description;
     private Date date;

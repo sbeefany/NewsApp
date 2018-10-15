@@ -1,4 +1,4 @@
-package com.example.user.mycardapp;
+package com.example.user.mycardapp.Presentation.ViewHolder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,16 +10,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.mycardapp.Data.NewsItem;
+import com.example.user.mycardapp.Presentation.Activity.NewsDetailsActivity;
+import com.example.user.mycardapp.R;
 
 import java.util.ArrayList;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
-    TextView category;
-    TextView title;
-    TextView description;
-    TextView date;
-    ImageView image;
-    CardView cardView;
+
+    private TextView category;
+    private TextView title;
+    private TextView description;
+    private TextView date;
+    private ImageView image;
+    private CardView cardView;
 
     public NewsViewHolder ( @NonNull View itemView ) {
         super ( itemView );

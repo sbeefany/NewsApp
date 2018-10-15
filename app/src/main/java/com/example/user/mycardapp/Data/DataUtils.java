@@ -7,6 +7,10 @@ import java.util.List;
 
 public class DataUtils {
 
+    private static Date createDate ( int year , int month , int date , int hrs , int min ) {
+        return new GregorianCalendar ( year , month - 1 , date , hrs , min ).getTime ();
+    }
+
     public static List <NewsItem> generateNews () {
         final Category darwinAwards = new Category ( 1 , "Darwin Awards" );
         final Category criminal = new Category ( 2 , "Criminal" );
@@ -131,11 +135,6 @@ public class DataUtils {
                         + "\"When I first started gigging around the pubs and clubs up North, two songs that were always in my set "
                         + "were Goodnight Girl and Love Is All Around.\""
         ) );
-
         return news;
-    }
-
-    private static Date createDate ( int year , int month , int date , int hrs , int min ) {
-        return new GregorianCalendar ( year , month - 1 , date , hrs , min ).getTime ();
     }
 }

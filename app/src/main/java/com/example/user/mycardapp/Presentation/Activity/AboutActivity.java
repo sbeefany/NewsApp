@@ -1,4 +1,4 @@
-package com.example.user.mycardapp;
+package com.example.user.mycardapp.Presentation.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,7 +11,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.user.mycardapp.R;
+
 public class AboutActivity extends AppCompatActivity {
+
     public static final String[] EMAIL_ADDRESS = {"cu_009@mail.ru"};
     public static final String MAILTO = "cu_009@mail.ru";
     public static final String VK_URL = "https://vk.com";

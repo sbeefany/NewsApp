@@ -1,6 +1,7 @@
 package com.example.user.mycardapp.Data;
 
 public class Category {
+
     private final int id;
     private final String name;
 

@@ -1,4 +1,4 @@
-package com.example.user.mycardapp;
+package com.example.user.mycardapp.Presentation.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,10 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.user.mycardapp.Data.NewsItem;
+import com.example.user.mycardapp.Presentation.ViewHolder.NewsViewHolder;
+import com.example.user.mycardapp.R;
 
 import java.util.ArrayList;
 
 public class Adapter extends RecyclerView.Adapter <NewsViewHolder> {
+
     private ArrayList <NewsItem> news;
     private Context context;
 
