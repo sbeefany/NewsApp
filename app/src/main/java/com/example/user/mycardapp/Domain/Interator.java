@@ -15,7 +15,7 @@ import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public class Interator implements IInterator {
-    private static final long DELAY= 2;
+    private static final long DELAY = 2;
     private CompositeDisposable disposables;
 
     public Interator () {
@@ -25,7 +25,7 @@ public class Interator implements IInterator {
     @Override
     public void execute ( @NonNull DisposableObserver observer ) {
         Observable <NewsItem> observable = Observable.fromIterable ( DataUtils.generateNews () )
-                .delay ( DELAY, TimeUnit.SECONDS )
+                .delay ( DELAY , TimeUnit.SECONDS )
                 .subscribeOn ( Schedulers.io () )
                 .observeOn ( AndroidSchedulers.mainThread () );
         addDisposable ( observable.subscribeWith ( observer ) );
