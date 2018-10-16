@@ -39,6 +39,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsContract.
     }
 
     private void initPresenter () {
+        if(Presenter.presenter!=null)
         presenter = Presenter.presenter;
         if ( presenter == null ) {
             presenter = new Presenter ();

@@ -24,6 +24,9 @@ public class Interator implements IInterator {
 
     @Override
     public void execute ( @NonNull DisposableObserver observer ) {
+        if ( disposables.isDisposed () ) {
+            disposables = new CompositeDisposable ();
+        }
         Observable <NewsItem> observable = Observable.fromIterable ( DataUtils.generateNews () )
                 .delay ( DELAY , TimeUnit.SECONDS )
                 .subscribeOn ( Schedulers.io () )

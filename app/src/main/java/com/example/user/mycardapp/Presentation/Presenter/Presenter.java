@@ -1,6 +1,7 @@
 package com.example.user.mycardapp.Presentation.Presenter;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.user.mycardapp.Data.NewsItem;
 import com.example.user.mycardapp.Domain.IInterator;
@@ -22,6 +23,7 @@ public class Presenter implements NewsContract.INewsPresenter {
 
     @Override
     public void init () {
+        Log.e ( "View" , view.toString () );
         if ( view != null ) {
             view.initViews ();
             view.startLoading ();
@@ -43,11 +45,13 @@ public class Presenter implements NewsContract.INewsPresenter {
     @Override
     public void finish () {
         interator.dispose ();
+        view.finishLoading ();
         presenter = this;
     }
 
     @Override
     public void getNews () {
+
         interator.execute ( new MyObserver () );
     }
 
@@ -57,6 +61,7 @@ public class Presenter implements NewsContract.INewsPresenter {
         @Override
         public void onNext ( NewsItem newsItem ) {
             newsItems.add ( newsItem );
+            Log.e ( "CHECK" , "CHECK" );
         }
 
         @Override
