@@ -33,5 +33,7 @@ public interface NewsContract {
         void finish ();
 
         void getNews ();
+
+        ArrayList<NewsItem> getSavedInformation();
     }
 }

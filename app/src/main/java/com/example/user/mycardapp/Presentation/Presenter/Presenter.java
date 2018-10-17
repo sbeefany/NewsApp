@@ -14,6 +14,8 @@ import io.reactivex.observers.DisposableObserver;
 public class Presenter implements NewsContract.INewsPresenter {
 
     public static NewsContract.INewsPresenter presenter;
+    private ArrayList <NewsItem> news;
+    private MyObserver observer;
     private NewsContract.INewsView view;
     private IInterator interator;
 
@@ -44,19 +46,23 @@ public class Presenter implements NewsContract.INewsPresenter {
 
     @Override
     public void finish () {
-        interator.dispose ();
         view.finishLoading ();
         presenter = this;
     }
 
     @Override
     public void getNews () {
+        observer = new MyObserver ();
+        interator.execute ( observer );
+    }
 
-        interator.execute ( new MyObserver () );
+    @Override
+    public ArrayList <NewsItem> getSavedInformation () {
+        return news;
     }
 
     private final class MyObserver extends DisposableObserver <NewsItem> {
-        ArrayList <NewsItem> newsItems = new ArrayList <> ();
+        private ArrayList <NewsItem> newsItems = new ArrayList <> ();
 
         @Override
         public void onNext ( NewsItem newsItem ) {
@@ -69,6 +75,8 @@ public class Presenter implements NewsContract.INewsPresenter {
             if ( Presenter.this.view != null ) {
                 Presenter.this.view.finishLoading ();
                 Presenter.this.view.showMwssage ( e.getMessage () );
+            } else {
+                observer.dispose ();
             }
         }
 
@@ -77,6 +85,9 @@ public class Presenter implements NewsContract.INewsPresenter {
             if ( Presenter.this.view != null ) {
                 Presenter.this.view.finishLoading ();
                 Presenter.this.view.loadNews ( newsItems );
+            } else {
+                Presenter.this.news = newsItems;
+                observer.dispose ();
             }
         }
     }

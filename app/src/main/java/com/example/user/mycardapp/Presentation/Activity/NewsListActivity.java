@@ -34,13 +34,16 @@ public class NewsListActivity extends AppCompatActivity implements NewsContract.
         setContentView ( R.layout.activity_news_list );
         initPresenter ();
         presenter.attachView ( this );
-        presenter.init ();
+        if ( presenter.getSavedInformation () != null && presenter.getSavedInformation ().size () != 0 ) {
+            initRecycler ( presenter.getSavedInformation () );
+        } else {
+            presenter.init ();
+        }
 
     }
 
     private void initPresenter () {
-        if ( Presenter.presenter != null )
-            presenter = Presenter.presenter;
+        presenter = Presenter.presenter;
         if ( presenter == null ) {
             presenter = new Presenter ();
         }
