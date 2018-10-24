@@ -11,7 +11,7 @@ public class NewsItem {
     private final String previewText;
     private final String fullText;
 
-    public NewsItem ( String title , String imageUrl , Category category , Date publishDate , String previewText , String fullText ) {
+    public NewsItem (String title , String imageUrl , Category category , Date publishDate , String previewText , String fullText) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.category = category;
@@ -43,5 +43,6 @@ public class NewsItem {
     public String getFullText () {
         return fullText;
     }
+
 }
 

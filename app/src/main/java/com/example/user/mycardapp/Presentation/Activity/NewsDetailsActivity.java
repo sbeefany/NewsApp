@@ -26,51 +26,52 @@ public class NewsDetailsActivity extends AppCompatActivity {
     private String imageUrl;
     private String category;
 
-    public static void toNewsDetailsActivity ( @NonNull Context context , @NonNull String imageUrl ,
-                                               @NonNull String category , @NonNull String title ,
-                                               @NonNull String description , @NonNull Date date ) {
-        Intent intent = new Intent ( context , NewsDetailsActivity.class );
-        intent.putExtra ( "imageUrl" , imageUrl );
-        intent.putExtra ( "category" , category );
-        intent.putExtra ( "title" , title );
-        intent.putExtra ( "description" , description );
-        intent.putExtra ( "date" , date );
-        context.startActivity ( intent );
+    public static void toNewsDetailsActivity (@NonNull Context context , @NonNull String imageUrl ,
+                                              @NonNull String category , @NonNull String title ,
+                                              @NonNull String description , @NonNull Date date) {
+        Intent intent = new Intent(context , NewsDetailsActivity.class);
+        intent.putExtra("imageUrl" , imageUrl);
+        intent.putExtra("category" , category);
+        intent.putExtra("title" , title);
+        intent.putExtra("description" , description);
+        intent.putExtra("date" , date);
+        context.startActivity(intent);
     }
 
     @Override
-    protected void onCreate ( Bundle savedInstanceState ) {
-        super.onCreate ( savedInstanceState );
-        setContentView ( R.layout.activity_news_details );
-        getDataFromIntent ();
-        initToolBar ();
-        initViews ();
-        dataToView ();
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_news_details);
+        getDataFromIntent();
+        initToolBar();
+        initViews();
+        dataToView();
     }
 
     private void getDataFromIntent () {
-        imageUrl = getIntent ().getStringExtra ( "imageUrl" );
-        category = getIntent ().getStringExtra ( "category" );
-        title = getIntent ().getStringExtra ( "title" );
-        description = getIntent ().getStringExtra ( "description" );
-        date = ( Date ) getIntent ().getSerializableExtra ( "date" );
+        imageUrl = getIntent().getStringExtra("imageUrl");
+        category = getIntent().getStringExtra("category");
+        title = getIntent().getStringExtra("title");
+        description = getIntent().getStringExtra("description");
+        date = ( Date ) getIntent().getSerializableExtra("date");
     }
 
     private void initViews () {
-        image = findViewById ( R.id.image );
-        titleTextView = findViewById ( R.id.title );
-        descriptionTextView = findViewById ( R.id.description );
-        dateTextView = findViewById ( R.id.date );
+        image = findViewById(R.id.image);
+        titleTextView = findViewById(R.id.title);
+        descriptionTextView = findViewById(R.id.description);
+        dateTextView = findViewById(R.id.date);
     }
 
     private void dataToView () {
-        Glide.with ( this ).load ( imageUrl ).into ( image );
-        titleTextView.setText ( title );
-        descriptionTextView.setText ( description );
-        dateTextView.setText ( date.toString () );
+        Glide.with(this).load(imageUrl).into(image);
+        titleTextView.setText(title);
+        descriptionTextView.setText(description);
+        dateTextView.setText(date.toString());
     }
 
     private void initToolBar () {
-        Objects.requireNonNull ( getSupportActionBar () ).setTitle ( category );
+        Objects.requireNonNull(getSupportActionBar()).setTitle(category);
     }
+
 }
