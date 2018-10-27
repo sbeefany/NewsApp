@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/outside_margin"
-    tools:context=".NewsDetailsActivity">
+    tools:context=".Presentation.Activity.NewsDetailsActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
