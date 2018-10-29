@@ -1,38 +1,32 @@
 package com.example.user.mycardapp.Data;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import io.reactivex.Observable;
 
-public class RepositoryImpl implements Repository {
+public class FakeRepositoryImpl implements Repository {
 
     private static Repository repository;
     private Observable<NewsItem> news;
 
-    private RepositoryImpl () {
+    private FakeRepositoryImpl () {
     }
 
     public static Repository getRepository () {
         if ( repository == null ) {
-            repository = new RepositoryImpl();
+            repository = new FakeRepositoryImpl();
         }
         return repository;
     }
 
     @Override
-    public Observable<NewsItem> getNews () {
+    public Observable<NewsItem> getNews (String category) {
         if ( news != null ) {
             Log.d("It's cache" , "it's cache");
-            return news;
         } else {
-            return Observable.fromIterable(DataUtils.generateNews());
+            news = Observable.fromIterable(DataUtils.generateNews());
         }
-    }
-
-    @Override
-    public void saveNewsToCache (@NonNull Observable<NewsItem> news) {
-        this.news = news;
+        return news;
     }
 
 }

@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.user.mycardapp.Data.NewsItem;
@@ -18,6 +20,7 @@ import com.example.user.mycardapp.Presentation.Adapter.Adapter;
 import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
 import com.example.user.mycardapp.Presentation.Presenter.NewsPresenterImpl;
 import com.example.user.mycardapp.Presentation.Presenter.NewsView;
+import com.example.user.mycardapp.Presentation.StateError;
 import com.example.user.mycardapp.R;
 
 import java.util.ArrayList;
@@ -28,6 +31,8 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
     private NewsPresenter presenter;
+    private ImageView badSmile;
+    private Button reload;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -35,11 +40,11 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         setContentView(R.layout.activity_news_list);
         presenter = NewsPresenterImpl.createPresenter();
         presenter.attachView(this);
-        presenter.init();
+        presenter.init("world");
     }
 
-        private void initRecycler (@NonNull List<NewsItem> newsItems) {
-        Adapter adapter = new Adapter((ArrayList<NewsItem> ) newsItems , this);
+    private void initRecycler (@NonNull List<NewsItem> newsItems) {
+        Adapter adapter = new Adapter(( ArrayList<NewsItem> ) newsItems , this);
         if ( getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ) {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(layoutManager);
@@ -70,6 +75,26 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     public void initViews () {
         progressBar = findViewById(R.id.progress_bar);
         recyclerView = findViewById(R.id.news_list);
+        badSmile = findViewById(R.id.bad_smile);
+        reload = findViewById(R.id.try_reload);
+    }
+
+    @Override
+    public void showStateError (StateError error) {
+        switch ( error ) {
+            case ServerError: {
+                finishLoading();
+                badSmile.setVisibility(View.VISIBLE);
+                reload.setVisibility(View.VISIBLE);
+                break;
+            }
+            case NetworkError: {
+                finishLoading();
+                badSmile.setVisibility(View.VISIBLE);
+                reload.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
     }
 
     @Override

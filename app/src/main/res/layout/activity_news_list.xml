@@ -4,6 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Presentation.Activity.NewsListActivity">
+    <ImageView
+        android:id="@+id/bad_smile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:src="@drawable/ic_sad_smile"
+        />
+    <Button
+        android:id="@+id/try_reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/bad_smile"
+        android:text="@string/reload"
+        android:visibility="gone"
+        />
 
     <ProgressBar
         android:id="@+id/progress_bar"

@@ -9,16 +9,12 @@ import io.reactivex.Observable;
 
 public interface NewsPresenter {
 
-    void init ();
+    void init (String category);
 
     void attachView (@NonNull NewsView view);
 
     void detachView ();
 
     void finish ();
-
-    void getNews ();
-
-    void saveNewsToCache (@NonNull Observable<NewsItem> news);
 
 }

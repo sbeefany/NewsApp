@@ -3,6 +3,7 @@ package com.example.user.mycardapp.Presentation.Presenter;
 import android.support.annotation.NonNull;
 
 import com.example.user.mycardapp.Data.NewsItem;
+import com.example.user.mycardapp.Presentation.StateError;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ public interface NewsView {
     void finishLoading ();
 
     void initViews ();
+
+    void showStateError(StateError error);
 
 }
 
