@@ -1,6 +1,5 @@
 package com.example.user.mycardapp.Presentation.Activity;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,15 +7,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.user.mycardapp.Data.NewsItem;
 import com.example.user.mycardapp.Presentation.Adapter.Adapter;
+import com.example.user.mycardapp.Presentation.Categories;
 import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
 import com.example.user.mycardapp.Presentation.Presenter.NewsPresenterImpl;
 import com.example.user.mycardapp.Presentation.Presenter.NewsView;
@@ -33,14 +38,18 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     private NewsPresenter presenter;
     private ImageView badSmile;
     private Button reload;
+    private Categories category;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if ( savedInstanceState != null && !savedInstanceState.isEmpty() ) {
+            category = Categories.valueOf(savedInstanceState.getString("spinnerState"));
+        }
         setContentView(R.layout.activity_news_list);
         presenter = NewsPresenterImpl.createPresenter();
         presenter.attachView(this);
-        presenter.init("world");
+        presenter.init();
     }
 
     private void initRecycler (@NonNull List<NewsItem> newsItems) {
@@ -58,14 +67,41 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     @Override
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.menu_option , menu);
+        MenuItem item = menu.findItem(R.id.spinner);
+        Spinner categories = ( Spinner ) item.getActionView();
+        ArrayAdapter<Categories> adapter = new ArrayAdapter<>(
+                this , android.R.layout.simple_list_item_1 , Categories.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected (AdapterView<?> adapterView , View view , int i , long l) {
+                category = Categories.values()[i];
+                presenter.getNews(category.toString());
+            }
+
+            @Override
+            public void onNothingSelected (AdapterView<?> adapterView) {
+                //nothing
+            }
+        });
+        categories.setAdapter(adapter);
+        if ( category != null ) {
+            Log.d("positionItem" , adapter.getPosition(category) + "");
+            categories.setSelection(adapter.getPosition(category));
+        }
         return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState (Bundle outState) {
+        outState.putString("spinnerState" , category.toString());
+        Log.d("It's save method" , category.toString());
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
         switch ( item.getItemId() ) {
-            case R.id.about_activity:
-                startActivity(new Intent(this , AboutActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -94,12 +130,14 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
                 reload.setVisibility(View.VISIBLE);
                 break;
             }
+            default:
+                new Exception(new IllegalStateException("unknown state,sorry"));
         }
     }
 
     @Override
-    public void showMwssage (@NonNull String message) {
-
+    public void showMessage (@NonNull String message) {
+        Toast.makeText(this , message , Toast.LENGTH_LONG).show();
     }
 
     @Override

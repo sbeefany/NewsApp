@@ -35,12 +35,11 @@ public class NewsPresenterImpl implements NewsPresenter {
     }
 
     @Override
-    public void init (String category) {
+    public void init () {
         Log.d("View" , view.toString());
         if ( view != null ) {
             view.initViews();
             view.startLoading();
-            getNews(category);
         }
     }
 
@@ -61,17 +60,19 @@ public class NewsPresenterImpl implements NewsPresenter {
     }
 
     @SuppressLint("CheckResult")
-    private void getNews (String category) {
+    @Override
+    public void getNews (String category) {
         Observable<NewsItem> observable = interactor.getAllNews(category);
         if ( view != null ) {
             ArrayList<NewsItem> newsItems = new ArrayList<>();
             disposable = observable
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(newsItems::add,
+                    .subscribe(newsItems::add ,
                             throwable -> {
-                        Log.e("Exception!!!",throwable.toString());
-                                if(throwable instanceof IOException ){
+                                Log.e("Exception!!!" , throwable.toString());
+                                if ( throwable instanceof IOException ) {
                                     view.showStateError(StateError.NetworkError);
+                                    view.showMessage(throwable.getMessage());
                                     return;
                                 }
                                 view.showStateError(StateError.ServerError);

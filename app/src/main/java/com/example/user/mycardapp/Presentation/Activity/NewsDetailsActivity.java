@@ -30,12 +30,10 @@ public class NewsDetailsActivity extends AppCompatActivity {
         initToolBar();
         initViews();
         showDataInWeb(url);
-
     }
 
     private void getDataFromIntent () {
         url = getIntent().getStringExtra("url");
-
     }
 
     private void initViews () {
@@ -47,7 +45,7 @@ public class NewsDetailsActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Detail");
     }
 
-    private void showDataInWeb(String uri){
+    private void showDataInWeb (@NonNull String uri) {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.loadUrl(uri);
     }

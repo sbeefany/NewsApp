@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface NewsView {
 
-    void showMwssage (@NonNull String message);
+    void showMessage (@NonNull String message);
 
     void loadNews (@NonNull List<NewsItem> news);
 
@@ -19,7 +19,7 @@ public interface NewsView {
 
     void initViews ();
 
-    void showStateError(StateError error);
+    void showStateError (StateError error);
 
 }
 

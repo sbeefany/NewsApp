@@ -35,8 +35,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:drawableStart="@drawable/ic_person_black_24dp"
+                android:drawableLeft="@drawable/ic_person_black_24dp"
                 android:text="@string/example_name"
                 android:textSize="@dimen/text_size" />
 
@@ -48,9 +48,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_between_comonents"
-                android:drawableLeft="@drawable/ic_mood_black_24dp"
+                android:layout_marginTop="@dimen/margin_between_components"
                 android:drawableStart="@drawable/ic_mood_black_24dp"
+                android:drawableLeft="@drawable/ic_mood_black_24dp"
                 android:text="@string/example_mood"
                 android:textSize="@dimen/text_size" />
 
@@ -62,9 +62,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_between_comonents"
-                android:drawableLeft="@drawable/ic_cake_black_24dp"
+                android:layout_marginTop="@dimen/margin_between_components"
                 android:drawableStart="@drawable/ic_cake_black_24dp"
+                android:drawableLeft="@drawable/ic_cake_black_24dp"
                 android:text="@string/example_birth"
                 android:textSize="@dimen/text_size" />
 
@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_between_comonents"
+                android:layout_marginTop="@dimen/margin_between_components"
                 android:text="@string/example_about_person"
                 android:textSize="@dimen/text_size" />
 
@@ -107,14 +107,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/margin_between_comonents"
+                android:layout_margin="@dimen/margin_between_components"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:id="@+id/vk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/margin_between_comonents"
+                    android:layout_marginRight="@dimen/margin_between_components"
                     android:contentDescription="@string/vk"
                     android:src="@drawable/vk" />
 

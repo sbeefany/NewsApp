@@ -20,8 +20,6 @@ public class NewsItem {
     private final String publishDate;
     @Nullable
     private final String previewText;
-    @Nullable
-    private final String fullText;
     @NonNull
     private final String url;
 
@@ -31,7 +29,6 @@ public class NewsItem {
         this.category = category;
         this.publishDate = publishDate.toString();
         this.previewText = previewText;
-        this.fullText = fullText;
         this.url = "https//vk.com";
     }
 
@@ -42,7 +39,6 @@ public class NewsItem {
         category = initCategory(dtoNewsModel);
         publishDate = dtoNewsModel.getPublishedDate();
         previewText = dtoNewsModel.get_abstract();
-        fullText = null;
         for (Multimedia multimedia : dtoNewsModel.getMultimedia()) {
             if ( multimedia.getFormat().equals("Normal") )
                 image = multimedia.getUrl();
@@ -80,9 +76,6 @@ public class NewsItem {
         return previewText;
     }
 
-    public String getFullText () {
-        return fullText;
-    }
 
 }
 
