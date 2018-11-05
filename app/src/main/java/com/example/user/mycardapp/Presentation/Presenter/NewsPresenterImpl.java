@@ -7,7 +7,9 @@ import android.util.Log;
 import com.example.user.mycardapp.Data.NewsItem;
 import com.example.user.mycardapp.Domain.Interactor;
 import com.example.user.mycardapp.Domain.NewsInteractorImpl;
+import com.example.user.mycardapp.Presentation.StateError;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import io.reactivex.Observable;
@@ -38,7 +40,6 @@ public class NewsPresenterImpl implements NewsPresenter {
         if ( view != null ) {
             view.initViews();
             view.startLoading();
-            getNews();
         }
     }
 
@@ -60,29 +61,28 @@ public class NewsPresenterImpl implements NewsPresenter {
 
     @SuppressLint("CheckResult")
     @Override
-    public void getNews () {
-        Observable<NewsItem> observable = interactor.getAllNews();
-        saveNewsToCache(observable);
-        if ( NewsPresenterImpl.this.view != null ) {
+    public void getNews (String category) {
+        Observable<NewsItem> observable = interactor.getAllNews(category);
+        if ( view != null ) {
             ArrayList<NewsItem> newsItems = new ArrayList<>();
             disposable = observable
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(newsItems::add ,
                             throwable -> {
-                                NewsPresenterImpl.this.view.finishLoading();
-                                NewsPresenterImpl.this.view.showMwssage(throwable.getMessage());
+                                Log.e("Exception!!!" , throwable.toString());
+                                if ( throwable instanceof IOException ) {
+                                    view.showStateError(StateError.NetworkError);
+                                    view.showMessage(throwable.getMessage());
+                                    return;
+                                }
+                                view.showStateError(StateError.ServerError);
                             } ,
                             () -> {
-                                NewsPresenterImpl.this.view.finishLoading();
-                                NewsPresenterImpl.this.view.loadNews(newsItems);
+                                view.finishLoading();
+                                view.loadNews(newsItems);
                             }
                     );
         }
-    }
-
-    @Override
-    public void saveNewsToCache (@NonNull Observable<NewsItem> news) {
-        interactor.saveNewsToCache(news);
     }
 
 }

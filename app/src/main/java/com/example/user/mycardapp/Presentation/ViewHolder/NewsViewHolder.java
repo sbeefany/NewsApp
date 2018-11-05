@@ -43,9 +43,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setupClickListener (final int position , final Context context , final ArrayList<NewsItem> news) {
-        cardView.setOnClickListener(view -> NewsDetailsActivity.toNewsDetailsActivity(context , news.get(position).getImageUrl() ,
-                news.get(position).getCategory().getName() , news.get(position).getTitle() ,
-                news.get(position).getFullText() , news.get(position).getPublishDate()));
+        cardView.setOnClickListener(view -> NewsDetailsActivity.toNewsDetailsActivity(context , news.get(position).getUrl()));
     }
 
 }

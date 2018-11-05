@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,12 +35,7 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
         twitter.setOnClickListener(view -> openWeb(TWITTER_URL));
-        vk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view) {
-                openWeb(VK_URL);
-            }
-        });
+        vk.setOnClickListener(view -> openWeb(VK_URL));
 
     }
 

@@ -5,19 +5,37 @@
     android:layout_height="match_parent"
     tools:context=".Presentation.Activity.NewsListActivity">
 
+    <ImageView
+        android:id="@+id/bad_smile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_sad_smile"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/try_reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bad_smile"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margin_between_components"
+        android:text="@string/reload"
+        android:visibility="gone" />
+
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/news_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/half_standart_margin"
+        android:layout_margin="@dimen/half_standard_margin"
         android:orientation="vertical" />
 
 </RelativeLayout>
