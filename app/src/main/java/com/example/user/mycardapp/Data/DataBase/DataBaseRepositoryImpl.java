@@ -1,0 +1,49 @@
+package com.example.user.mycardapp.Data.DataBase;
+
+import android.content.Context;
+
+import com.example.user.mycardapp.Data.NewsItem;
+
+import java.util.ArrayList;
+
+import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+
+public class DataBaseRepositoryImpl implements DataBaseRepository {
+    private static DataBaseRepository instance;
+    private NewsDataBase dataBase;
+
+    private DataBaseRepositoryImpl (@NonNull Context context) {
+        dataBase = NewsDataBase.getInstance(context);
+    }
+
+    public synchronized static DataBaseRepository getInstance (@NonNull Context context) {
+        if ( instance == null ) {
+            instance = new DataBaseRepositoryImpl(context);
+        }
+        return instance;
+    }
+
+    @Override
+    public NewsItem getOneNews (@NonNull int id) {
+        return new NewsItem(dataBase.filmDao().getNewsById(id));
+    }
+
+    @Override
+    public void saveAllNews (ArrayList<NewsItem> newsList) {
+        dataBase.filmDao().insertAll();
+    }
+
+    @Override
+    public void saveOneNews (NewsItem oneNews) {
+        dataBase.filmDao().insert(new DBModel(oneNews));
+    }
+
+
+    @Override
+    public Observable<NewsItem> getNews (String category) {
+        return dataBase.filmDao().getAllNews(category)
+                .flatMap(listBdNews -> Observable.fromIterable(listBdNews))
+                .map(bdNews -> new NewsItem(bdNews));
+    }
+}

@@ -35,7 +35,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void initData (int position , Context context , ArrayList<NewsItem> news) {
-        category.setText(news.get(position).getCategory().getName());
+        category.setText(news.get(position).getCategory());
         title.setText(news.get(position).getTitle());
         description.setText(news.get(position).getPreviewText());
         date.setText(news.get(position).getPublishDate().toString());

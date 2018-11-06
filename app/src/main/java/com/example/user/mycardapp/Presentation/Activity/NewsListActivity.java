@@ -1,5 +1,7 @@
 package com.example.user.mycardapp.Presentation.Activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -22,9 +24,9 @@ import android.widget.Toast;
 import com.example.user.mycardapp.Data.NewsItem;
 import com.example.user.mycardapp.Presentation.Adapter.Adapter;
 import com.example.user.mycardapp.Presentation.Categories;
-import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
-import com.example.user.mycardapp.Presentation.Presenter.NewsPresenterImpl;
-import com.example.user.mycardapp.Presentation.Presenter.NewsView;
+import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter.NewsPresenter;
+import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter.NewsPresenterImpl;
+import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter.NewsView;
 import com.example.user.mycardapp.Presentation.StateError;
 import com.example.user.mycardapp.R;
 
@@ -40,6 +42,11 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     private Button reload;
     private Categories category;
 
+    public static void toNewsListActivity (Activity activity) {
+        Intent intent = new Intent(activity , NewsListActivity.class);
+        activity.startActivity(intent);
+    }
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +54,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
             category = Categories.valueOf(savedInstanceState.getString("spinnerState"));
         }
         setContentView(R.layout.activity_news_list);
-        presenter = NewsPresenterImpl.createPresenter();
+        presenter = NewsPresenterImpl.createPresenter(getApplicationContext());
         presenter.attachView(this);
         presenter.init();
     }

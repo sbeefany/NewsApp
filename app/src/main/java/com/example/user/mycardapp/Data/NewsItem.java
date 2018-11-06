@@ -1,9 +1,9 @@
 package com.example.user.mycardapp.Data;
 
+import com.example.user.mycardapp.Data.DataBase.DBModel;
 import com.example.user.mycardapp.Data.Network.DTOModels.Multimedia;
 import com.example.user.mycardapp.Data.Network.DTOModels.Result;
 
-import java.util.Date;
 import java.util.Random;
 
 import io.reactivex.annotations.NonNull;
@@ -11,32 +11,27 @@ import io.reactivex.annotations.Nullable;
 
 public class NewsItem {
     @Nullable
-    private final String title;
+    private String title;
     @Nullable
-    private final String imageUrl;
+    private String imageUrl;
     @Nullable
-    private final Category category;
+    private String category;
     @Nullable
-    private final String publishDate;
+    private String publishDate;
     @Nullable
-    private final String previewText;
+    private String previewText;
     @NonNull
-    private final String url;
-
-    public NewsItem (String title , String imageUrl , Category category , Date publishDate , String previewText , String fullText) {
-        this.title = title;
-        this.imageUrl = imageUrl;
-        this.category = category;
-        this.publishDate = publishDate.toString();
-        this.previewText = previewText;
-        this.url = "https//vk.com";
-    }
-
+    private String fullText;
+    @NonNull
+    private String url;
+    @NonNull
+    private int id;
     public NewsItem (@NonNull Result dtoNewsModel) {
         String image = null;
+        id = new Random().nextInt();
         url = dtoNewsModel.getUrl();
         title = dtoNewsModel.getTitle();
-        category = initCategory(dtoNewsModel);
+        category = dtoNewsModel.getSubsection();
         publishDate = dtoNewsModel.getPublishedDate();
         previewText = dtoNewsModel.get_abstract();
         for (Multimedia multimedia : dtoNewsModel.getMultimedia()) {
@@ -44,12 +39,24 @@ public class NewsItem {
                 image = multimedia.getUrl();
         }
         this.imageUrl = image;
-
+    }
+    public NewsItem (@NonNull DBModel dbModel) {
+        id = dbModel.getId();
+        url = dbModel.getUrl();
+        title = dbModel.getTitle();
+        category = dbModel.getCategory();
+        publishDate = dbModel.getDate();
+        previewText = dbModel.getShortDescription();
+        fullText = dbModel.getFullDescription();
+        imageUrl = dbModel.getImageUrl();
     }
 
-    private Category initCategory (Result dtoNewsModel) {
-        Random random = new Random();
-        return new Category(random.nextInt() , dtoNewsModel.getSubsection());
+    public String getFullText () {
+        return fullText;
+    }
+
+    public void setFullText (String fullText) {
+        this.fullText = fullText;
     }
 
     public String getUrl () {
@@ -64,7 +71,7 @@ public class NewsItem {
         return imageUrl;
     }
 
-    public Category getCategory () {
+    public String getCategory () {
         return category;
     }
 
@@ -76,6 +83,8 @@ public class NewsItem {
         return previewText;
     }
 
-
+    public int getId () {
+        return id;
+    }
 }
 

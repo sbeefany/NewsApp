@@ -1,4 +1,4 @@
-package com.example.user.mycardapp.Presentation.Presenter;
+package com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
 
 import android.support.annotation.NonNull;
 

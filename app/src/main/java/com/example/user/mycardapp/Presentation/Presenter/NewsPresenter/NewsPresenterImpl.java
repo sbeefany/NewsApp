@@ -1,11 +1,12 @@
-package com.example.user.mycardapp.Presentation.Presenter;
+package com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.user.mycardapp.Data.NewsItem;
-import com.example.user.mycardapp.Domain.Interactor;
+import com.example.user.mycardapp.Domain.NewsInteractor;
 import com.example.user.mycardapp.Domain.NewsInteractorImpl;
 import com.example.user.mycardapp.Presentation.StateError;
 
@@ -21,15 +22,16 @@ public class NewsPresenterImpl implements NewsPresenter {
     private static NewsPresenter presenter;
     private Disposable disposable;
     private NewsView view;
-    private Interactor interactor;
+    private NewsInteractor interactor;
+    private Context context;
 
-    private NewsPresenterImpl () {
-        interactor = new NewsInteractorImpl();
+    private NewsPresenterImpl (Context context) {
+        interactor = new NewsInteractorImpl(context);
     }
 
-    public static NewsPresenter createPresenter () {
+    public static NewsPresenter createPresenter (Context context) {
         if ( presenter == null ) {
-            presenter = new NewsPresenterImpl();
+            presenter = new NewsPresenterImpl(context);
         }
         return presenter;
     }

@@ -4,7 +4,7 @@ import com.example.user.mycardapp.Data.NewsItem;
 
 import io.reactivex.Observable;
 
-public interface Interactor {
+public interface NewsInteractor {
 
     Observable<NewsItem> getAllNews (String category);
 
