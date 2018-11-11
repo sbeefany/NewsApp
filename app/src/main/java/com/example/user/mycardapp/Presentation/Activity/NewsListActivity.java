@@ -43,8 +43,10 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if ( savedInstanceState != null && !savedInstanceState.isEmpty() ) {
-            category = Categories.valueOf(savedInstanceState.getString("spinnerState"));
+        if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
+            category = !savedInstanceState.getString(getString(R.string.categories_key_for_bundle)).isEmpty() ?
+                    Categories.valueOf(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))) :
+                    Categories.HOME;
         }
         setContentView(R.layout.activity_news_list);
         presenter = NewsPresenterImpl.createPresenter();
@@ -54,7 +56,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
 
     private void initRecycler (@NonNull List<NewsItem> newsItems) {
         Adapter adapter = new Adapter(( ArrayList<NewsItem> ) newsItems , this);
-        if ( getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(layoutManager);
         } else {
@@ -85,8 +87,8 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
             }
         });
         categories.setAdapter(adapter);
-        if ( category != null ) {
-            Log.d("positionItem" , adapter.getPosition(category) + "");
+        if (category != null) {
+            Log.d("positionItem" , String.valueOf(adapter.getPosition(category)));
             categories.setSelection(adapter.getPosition(category));
         }
         return true;
@@ -94,7 +96,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
 
     @Override
     protected void onSaveInstanceState (Bundle outState) {
-        outState.putString("spinnerState" , category.toString());
+        outState.putString(getString(R.string.categories_key_for_bundle) , category.toString());
         Log.d("It's save method" , category.toString());
         super.onSaveInstanceState(outState);
     }
@@ -118,13 +120,13 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     @Override
     public void showStateError (StateError error) {
         switch ( error ) {
-            case ServerError: {
+            case SERVERERROR: {
                 finishLoading();
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);
                 break;
             }
-            case NetworkError: {
+            case NETWORKERROR: {
                 finishLoading();
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);

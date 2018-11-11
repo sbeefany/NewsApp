@@ -10,6 +10,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 
 public class NewsItem {
+
     @Nullable
     private final String title;
     @Nullable
@@ -40,7 +41,7 @@ public class NewsItem {
         publishDate = dtoNewsModel.getPublishedDate();
         previewText = dtoNewsModel.get_abstract();
         for (Multimedia multimedia : dtoNewsModel.getMultimedia()) {
-            if ( multimedia.getFormat().equals("Normal") )
+            if (multimedia.getFormat().equals("Normal"))
                 image = multimedia.getUrl();
         }
         this.imageUrl = image;

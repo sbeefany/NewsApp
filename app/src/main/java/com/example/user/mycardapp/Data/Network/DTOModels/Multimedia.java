@@ -15,28 +15,22 @@ public class Multimedia {
     @Expose
     private String copyright;
 
-    public String getUrl () {
-        return url;
+    public Multimedia (String url , String format , String copyright) {
+        this.url = url;
+        this.format = format;
+        this.copyright = copyright;
     }
 
-    public void setUrl (String url) {
-        this.url = url;
+    public String getUrl () {
+        return url;
     }
 
     public String getFormat () {
         return format;
     }
 
-    public void setFormat (String format) {
-        this.format = format;
-    }
-
     public String getCopyright () {
         return copyright;
-    }
-
-    public void setCopyright (String copyright) {
-        this.copyright = copyright;
     }
 
 }

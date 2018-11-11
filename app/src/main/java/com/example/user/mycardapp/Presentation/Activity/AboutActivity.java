@@ -30,7 +30,7 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
         sendMessage.setOnClickListener(view -> {
-            if ( !message.getText().toString().equals("") ) {
+            if (!message.getText().toString().equals("")) {
                 sendEmail(message.getText().toString());
             }
         });
@@ -42,7 +42,7 @@ public class AboutActivity extends AppCompatActivity {
     private void openWeb (@NonNull String url) {
         Intent webIntent = new Intent(Intent.ACTION_VIEW);
         webIntent.setData(Uri.parse(url));
-        if ( webIntent.resolveActivity(getPackageManager()) != null ) {
+        if (webIntent.resolveActivity(getPackageManager()) != null) {
             startActivity(webIntent);
         } else {
             showMessage(getString(R.string.error_no_browser_app));
@@ -55,7 +55,7 @@ public class AboutActivity extends AppCompatActivity {
         intent.putExtra(Intent.EXTRA_EMAIL , EMAIL_ADDRESS);
         intent.putExtra(Intent.EXTRA_SUBJECT , R.string.email_subject);
         intent.putExtra(Intent.EXTRA_TEXT , message);
-        if ( intent.resolveActivity(getPackageManager()) != null ) {
+        if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
             showMessage(getString(R.string.error_no_email_app));

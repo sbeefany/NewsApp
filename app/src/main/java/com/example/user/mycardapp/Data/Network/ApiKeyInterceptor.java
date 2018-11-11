@@ -17,7 +17,7 @@ public class ApiKeyInterceptor implements Interceptor {
         this.apiKey = apiKey;
     }
 
-    public static Interceptor getInterceptor (@NonNull String apiKey) {
+    static Interceptor getInterceptor (@NonNull String apiKey) {
         return new ApiKeyInterceptor(apiKey);
     }
 

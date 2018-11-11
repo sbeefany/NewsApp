@@ -1,32 +1,37 @@
 package com.example.user.mycardapp.Data;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 
 public class FakeRepositoryImpl implements Repository {
 
-    private static Repository repository;
-    private Observable<NewsItem> news;
+    private static Repository repository = new FakeRepositoryImpl();
+    private List<NewsItem> news;
 
     private FakeRepositoryImpl () {
     }
 
     public static Repository getRepository () {
-        if ( repository == null ) {
-            repository = new FakeRepositoryImpl();
-        }
         return repository;
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public Observable<NewsItem> getNews (String category) {
-        if ( news != null ) {
+        if (news != null) {
             Log.d("It's cache" , "it's cache");
         } else {
-            news = Observable.fromIterable(DataUtils.generateNews());
+             Observable.fromIterable(DataUtils.generateNews())
+            .toList()
+            .doOnSuccess(news->{
+                this.news=news;
+            });
         }
-        return news;
+        return Observable.fromIterable(news);
     }
 
 }

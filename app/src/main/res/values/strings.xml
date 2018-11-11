@@ -15,4 +15,6 @@
     <string name="twitter">twitter</string>
     <string name="poster_for_news">Постер</string>
     <string name="reload">reload</string>
+    <string name="categories_key_for_bundle">spinnerState</string>
+    <string name="Title_for_detail">Detail</string>
 </resources>

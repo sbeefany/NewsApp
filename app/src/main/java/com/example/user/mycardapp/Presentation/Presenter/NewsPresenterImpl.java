@@ -11,6 +11,7 @@ import com.example.user.mycardapp.Presentation.StateError;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -28,7 +29,7 @@ public class NewsPresenterImpl implements NewsPresenter {
     }
 
     public static NewsPresenter createPresenter () {
-        if ( presenter == null ) {
+        if (presenter == null) {
             presenter = new NewsPresenterImpl();
         }
         return presenter;
@@ -37,7 +38,7 @@ public class NewsPresenterImpl implements NewsPresenter {
     @Override
     public void init () {
         Log.d("View" , view.toString());
-        if ( view != null ) {
+        if (view != null) {
             view.initViews();
             view.startLoading();
         }
@@ -63,19 +64,19 @@ public class NewsPresenterImpl implements NewsPresenter {
     @Override
     public void getNews (String category) {
         Observable<NewsItem> observable = interactor.getAllNews(category);
-        if ( view != null ) {
-            ArrayList<NewsItem> newsItems = new ArrayList<>();
+        if (view != null) {
+            List<NewsItem> newsItems = new ArrayList<>();
             disposable = observable
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(newsItems::add ,
                             throwable -> {
                                 Log.e("Exception!!!" , throwable.toString());
-                                if ( throwable instanceof IOException ) {
-                                    view.showStateError(StateError.NetworkError);
+                                if (throwable instanceof IOException) {
+                                    view.showStateError(StateError.NETWORKERROR);
                                     view.showMessage(throwable.getMessage());
                                     return;
                                 }
-                                view.showStateError(StateError.ServerError);
+                                view.showStateError(StateError.SERVERERROR);
                             } ,
                             () -> {
                                 view.finishLoading();

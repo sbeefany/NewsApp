@@ -42,7 +42,7 @@ public class NewsDetailsActivity extends AppCompatActivity {
 
 
     private void initToolBar () {
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Detail");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.Title_for_detail);
     }
 
     private void showDataInWeb (@NonNull String uri) {

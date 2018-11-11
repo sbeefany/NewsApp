@@ -9,30 +9,25 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class NewsRestApi {
+class NewsRestApi {
 
-    public static final String API_KEY = "821543713b4543be87a3c19dc1a6b8ca";
+    private static final String API_KEY = "821543713b4543be87a3c19dc1a6b8ca";
     private static final String BASE_URL = "http://api.nytimes.com/svc/topstories/v2/";
     private static final int TIMEOUT_IN_SECONDS = 2;
-    private static NewsRestApi newsRestApi;
-    private final OkHttpClient httpClient;
-    private final Retrofit retrofit;
+    private static NewsRestApi newsRestApi = new NewsRestApi();
     private final NewsApi api;
 
     private NewsRestApi () {
-        httpClient = buildOkHttpClient();
-        retrofit = buildRetrofit(httpClient);
+        OkHttpClient httpClient = buildOkHttpClient();
+        Retrofit retrofit = buildRetrofit(httpClient);
         api = retrofit.create(NewsApi.class);
     }
 
-    public synchronized static NewsRestApi getInstance () {
-        if ( newsRestApi == null ) {
-            newsRestApi = new NewsRestApi();
-        }
+    synchronized static NewsRestApi getInstance () {
         return newsRestApi;
     }
 
-    public NewsApi getApi () {
+    NewsApi getApi () {
         return api;
     }
 
