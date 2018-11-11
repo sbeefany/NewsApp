@@ -1,15 +1,15 @@
 package com.example.user.mycardapp.Data.DataBase;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.example.user.mycardapp.Data.NewsItem;
 
 import java.util.Random;
 
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "news")
 public class DBModel {

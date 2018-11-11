@@ -1,30 +1,31 @@
 package com.example.user.mycardapp.Data.DataBase;
 
-import android.arch.persistence.db.SupportSQLiteOpenHelper;
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.DatabaseConfiguration;
-import android.arch.persistence.room.InvalidationTracker;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import androidx.room.Database;
+import androidx.room.DatabaseConfiguration;
+import androidx.room.InvalidationTracker;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteOpenHelper;
+
 @Database(entities = {DBModel.class}, version = 1)
 public abstract class NewsDataBase extends RoomDatabase {
-    private static NewsDataBase instance;
     private static final String DATABASE_NAME = "NewsRoomBd.db";
+    private static NewsDataBase instance;
 
-    public abstract NewsDao filmDao();
-
-    public synchronized static NewsDataBase getInstance(Context context){
-        if(instance==null){
-            instance = Room.databaseBuilder(context.getApplicationContext(),
-                    NewsDataBase.class,
+    public synchronized static NewsDataBase getInstance (Context context) {
+        if ( instance == null ) {
+            instance = Room.databaseBuilder(context.getApplicationContext() ,
+                    NewsDataBase.class ,
                     DATABASE_NAME)
                     .build();
         }
         return instance;
     }
+
+    public abstract NewsDao filmDao ();
 
     @NonNull
     @Override
