@@ -1,7 +1,6 @@
 package com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
 
-import android.support.annotation.NonNull;
-
+import androidx.annotation.NonNull;
 
 public interface NewsPresenter {
 
@@ -13,6 +12,6 @@ public interface NewsPresenter {
 
     void finish ();
 
-    void getNews (String category);
+    void getNews (String category,Boolean fromDataBase);
 
 }

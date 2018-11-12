@@ -1,13 +1,11 @@
 package com.example.user.mycardapp.Data.DataBase;
 
-
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import com.example.user.mycardapp.Data.NewsItem;
 
 import java.util.Random;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

@@ -39,11 +39,11 @@ public class DataBaseRepositoryImpl implements DataBaseRepository {
         dataBase.filmDao().insert(new DBModel(oneNews));
     }
 
-
     @Override
     public Observable<NewsItem> getNews (String category) {
         return dataBase.filmDao().getAllNews(category)
-                .flatMap(listBdNews -> Observable.fromIterable(listBdNews))
-                .map(bdNews -> new NewsItem(bdNews));
+                .toObservable()
+                .flatMap(Observable::fromIterable)
+                .map(NewsItem::new);
     }
 }

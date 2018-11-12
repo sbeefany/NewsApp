@@ -3,13 +3,14 @@ package com.example.user.mycardapp.Presentation.Activity;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
 import com.example.user.mycardapp.Presentation.Presenter.IntroPresenter.IntroPresenter;
 import com.example.user.mycardapp.Presentation.Presenter.IntroPresenter.IntroPresenterImpl;
 import com.example.user.mycardapp.Presentation.Presenter.IntroPresenter.IntroView;
 import com.example.user.mycardapp.R;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class IntroActivity extends AppCompatActivity implements IntroView {
     private IntroPresenter presenter;

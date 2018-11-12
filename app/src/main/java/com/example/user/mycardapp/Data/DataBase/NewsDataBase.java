@@ -1,8 +1,8 @@
 package com.example.user.mycardapp.Data.DataBase;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.DatabaseConfiguration;
 import androidx.room.InvalidationTracker;
@@ -16,10 +16,11 @@ public abstract class NewsDataBase extends RoomDatabase {
     private static NewsDataBase instance;
 
     public synchronized static NewsDataBase getInstance (Context context) {
-        if ( instance == null ) {
+        if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext() ,
                     NewsDataBase.class ,
                     DATABASE_NAME)
+                    .allowMainThreadQueries()
                     .build();
         }
         return instance;

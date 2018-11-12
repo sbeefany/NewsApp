@@ -6,7 +6,7 @@ import io.reactivex.Observable;
 
 public interface NewsInteractor {
 
-    Observable<NewsItem> getAllNews (String category);
+    Observable<NewsItem> getAllNews (String category,Boolean fromDataBase);
 
 }
 

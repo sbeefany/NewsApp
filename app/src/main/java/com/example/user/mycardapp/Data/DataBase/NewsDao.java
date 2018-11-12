@@ -6,13 +6,13 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import io.reactivex.Observable;
+import io.reactivex.Single;
 
 @Dao
 public interface NewsDao {
 
     @Query("SELECT * FROM news WHERE category = :category")
-    Observable<List<DBModel>> getAllNews (String category);
+    Single<List<DBModel>> getAllNews (String category);
 
     @Query("SELECT * FROM news WHERE id = :id")
     DBModel getNewsById (int id);

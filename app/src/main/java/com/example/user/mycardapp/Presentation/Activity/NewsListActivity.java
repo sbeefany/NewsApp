@@ -4,11 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +27,12 @@ import com.example.user.mycardapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class NewsListActivity extends AppCompatActivity implements NewsView {
 
@@ -83,7 +84,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
             @Override
             public void onItemSelected (AdapterView<?> adapterView , View view , int i , long l) {
                 category = Categories.values()[i];
-                presenter.getNews(category.toString());
+                presenter.getNews(category.toString(),true);
             }
 
             @Override

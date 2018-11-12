@@ -1,11 +1,11 @@
 package com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
 
-import android.support.annotation.NonNull;
-
 import com.example.user.mycardapp.Data.NewsItem;
 import com.example.user.mycardapp.Presentation.StateError;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 public interface NewsView {
 

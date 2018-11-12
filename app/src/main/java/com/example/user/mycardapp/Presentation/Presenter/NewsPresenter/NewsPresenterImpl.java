@@ -2,7 +2,6 @@ package com.example.user.mycardapp.Presentation.Presenter.NewsPresenter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.user.mycardapp.Data.NewsItem;
@@ -13,6 +12,7 @@ import com.example.user.mycardapp.Presentation.StateError;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -30,7 +30,7 @@ public class NewsPresenterImpl implements NewsPresenter {
     }
 
     public static NewsPresenter createPresenter (Context context) {
-        if ( presenter == null ) {
+        if (presenter == null) {
             presenter = new NewsPresenterImpl(context);
         }
         return presenter;
@@ -39,7 +39,7 @@ public class NewsPresenterImpl implements NewsPresenter {
     @Override
     public void init () {
         Log.d("View" , view.toString());
-        if ( view != null ) {
+        if (view != null) {
             view.initViews();
             view.startLoading();
         }
@@ -63,16 +63,17 @@ public class NewsPresenterImpl implements NewsPresenter {
 
     @SuppressLint("CheckResult")
     @Override
-    public void getNews (String category) {
-        Observable<NewsItem> observable = interactor.getAllNews(category);
-        if ( view != null ) {
+    public void getNews (String category,Boolean fromDataBase) {
+        Observable<NewsItem> observable = interactor.getAllNews(category , fromDataBase);
+        if (view != null) {
             ArrayList<NewsItem> newsItems = new ArrayList<>();
             disposable = observable
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(newsItems::add ,
+                    .subscribe(
+                            newsItems::add ,
                             throwable -> {
                                 Log.e("Exception!!!" , throwable.toString());
-                                if ( throwable instanceof IOException ) {
+                                if (throwable instanceof IOException) {
                                     view.showStateError(StateError.NetworkError);
                                     view.showMessage(throwable.getMessage());
                                     return;
@@ -80,8 +81,12 @@ public class NewsPresenterImpl implements NewsPresenter {
                                 view.showStateError(StateError.ServerError);
                             } ,
                             () -> {
-                                view.finishLoading();
-                                view.loadNews(newsItems);
+                                if (newsItems.size() == 0)
+                                    getNews(category,false);
+                                else {
+                                    view.finishLoading();
+                                    view.loadNews(newsItems);
+                                }
                             }
                     );
         }
