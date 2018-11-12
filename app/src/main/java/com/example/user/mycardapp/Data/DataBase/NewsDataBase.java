@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 @Database(entities = {DBModel.class}, version = 1)
 public abstract class NewsDataBase extends RoomDatabase {
-    private static final String DATABASE_NAME = "NewsRoomBd.db";
+    private static final String DATABASE_NAME = "NewsRoomDataBase.db";
     private static NewsDataBase instance;
 
     public synchronized static NewsDataBase getInstance (Context context) {
@@ -26,7 +26,7 @@ public abstract class NewsDataBase extends RoomDatabase {
         return instance;
     }
 
-    public abstract NewsDao filmDao ();
+    public abstract NewsDao newsDao ();
 
     @NonNull
     @Override

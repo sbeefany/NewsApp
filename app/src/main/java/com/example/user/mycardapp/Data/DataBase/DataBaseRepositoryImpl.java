@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.user.mycardapp.Data.NewsItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
@@ -18,7 +19,7 @@ public class DataBaseRepositoryImpl implements DataBaseRepository {
     }
 
     public synchronized static DataBaseRepository getInstance (@NonNull Context context) {
-        if ( instance == null ) {
+        if (instance == null) {
             instance = new DataBaseRepositoryImpl(context);
         }
         return instance;
@@ -26,24 +27,38 @@ public class DataBaseRepositoryImpl implements DataBaseRepository {
 
     @Override
     public NewsItem getOneNews (@NonNull int id) {
-        return new NewsItem(dataBase.filmDao().getNewsById(id));
+        return new NewsItem(dataBase.newsDao().getNewsById(id));
     }
 
     @Override
-    public void saveAllNews (ArrayList<NewsItem> newsList) {
-        dataBase.filmDao().insertAll();
+    public void saveAllNews (List<NewsItem> newsList , String category) {
+        dataBase.newsDao().insertAll(convertToDBModelArray(newsList));
     }
 
     @Override
     public void saveOneNews (NewsItem oneNews) {
-        dataBase.filmDao().insert(new DBModel(oneNews));
+        dataBase.newsDao().insert(new DBModel(oneNews));
+    }
+
+    @Override
+    public void deleteAll () {
+        dataBase.newsDao().deleteAll();
     }
 
     @Override
     public Observable<NewsItem> getNews (String category) {
-        return dataBase.filmDao().getAllNews(category)
+        return dataBase.newsDao().getAllNews(category)
                 .toObservable()
                 .flatMap(Observable::fromIterable)
                 .map(NewsItem::new);
+    }
+
+    private DBModel[] convertToDBModelArray (List<NewsItem> items) {
+        List<DBModel> dbModels = new ArrayList<>();
+        for (NewsItem item : items
+                ) {
+            dbModels.add(new DBModel(item));
+        }
+        return dbModels.toArray(new DBModel[dbModels.size()]);
     }
 }

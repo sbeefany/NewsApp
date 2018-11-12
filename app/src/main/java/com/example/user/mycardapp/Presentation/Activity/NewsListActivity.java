@@ -42,6 +42,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     private ImageView badSmile;
     private Button reload;
     private Categories category;
+    private Spinner categories;
 
     public static void toNewsListActivity (Activity activity) {
         Intent intent = new Intent(activity , NewsListActivity.class);
@@ -51,18 +52,22 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if ( savedInstanceState != null && !savedInstanceState.isEmpty() ) {
+        if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
             category = Categories.valueOf(savedInstanceState.getString("spinnerState"));
         }
         setContentView(R.layout.activity_news_list);
         presenter = NewsPresenterImpl.createPresenter(getApplicationContext());
         presenter.attachView(this);
         presenter.init();
+        reload.setOnClickListener(view->{
+            presenter.clearDataBase();
+            presenter.getNews(category.toString(),false);
+        });
     }
 
     private void initRecycler (@NonNull List<NewsItem> newsItems) {
         Adapter adapter = new Adapter(( ArrayList<NewsItem> ) newsItems , this);
-        if ( getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT ) {
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(layoutManager);
         } else {
@@ -76,7 +81,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     public boolean onCreateOptionsMenu (Menu menu) {
         getMenuInflater().inflate(R.menu.menu_option , menu);
         MenuItem item = menu.findItem(R.id.spinner);
-        Spinner categories = ( Spinner ) item.getActionView();
+        categories = ( Spinner ) item.getActionView();
         ArrayAdapter<Categories> adapter = new ArrayAdapter<>(
                 this , android.R.layout.simple_list_item_1 , Categories.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,7 +89,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
             @Override
             public void onItemSelected (AdapterView<?> adapterView , View view , int i , long l) {
                 category = Categories.values()[i];
-                presenter.getNews(category.toString(),true);
+                presenter.getNews(category.toString() , true);
             }
 
             @Override
@@ -93,7 +98,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
             }
         });
         categories.setAdapter(adapter);
-        if ( category != null ) {
+        if (category != null) {
             Log.d("positionItem" , adapter.getPosition(category) + "");
             categories.setSelection(adapter.getPosition(category));
         }
@@ -124,32 +129,38 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     }
 
     @Override
-    public void showStateError (StateError error) {
+    public void showStateError (@NonNull StateError error) {
         switch ( error ) {
             case ServerError: {
                 finishLoading();
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);
+                categories.setVisibility(View.GONE);
+                showMessage(getString(R.string.TechnicalProblemsMessage));
                 break;
             }
             case NetworkError: {
                 finishLoading();
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);
+                categories.setVisibility(View.GONE);
+                showMessage(getString(R.string.NetworkErrorMessage));
                 break;
             }
             default:
-                new Exception(new IllegalStateException("unknown state,sorry"));
+                new IllegalStateException("unknown state,sorry");
         }
     }
 
-    @Override
-    public void showMessage (@NonNull String message) {
+    private void showMessage (@NonNull String message) {
         Toast.makeText(this , message , Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void loadNews (@NonNull List<NewsItem> news) {
+        badSmile.setVisibility(View.GONE);
+        reload.setVisibility(View.GONE);
+        categories.setVisibility(View.VISIBLE);
         initRecycler(news);
     }
 

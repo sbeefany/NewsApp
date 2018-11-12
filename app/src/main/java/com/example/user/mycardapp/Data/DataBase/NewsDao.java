@@ -23,4 +23,7 @@ public interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert (DBModel newsEntity);
 
+    @Query("DELETE FROM news")
+    void deleteAll ();
+
 }

@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 
 public interface NewsView {
 
-    void showMessage (@NonNull String message);
-
     void loadNews (@NonNull List<NewsItem> news);
 
     void startLoading ();
@@ -19,7 +17,7 @@ public interface NewsView {
 
     void initViews ();
 
-    void showStateError (StateError error);
+    void showStateError (@NonNull StateError error);
 
 }
 

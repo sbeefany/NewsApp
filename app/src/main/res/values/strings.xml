@@ -17,4 +17,6 @@
     <string name="reload">reload</string>
     <string name="intro_text">Welcome!</string>
     <string name="button_text_in_intro">Get Started</string>
+    <string name="NetworkErrorMessage">Отсутствует соединение с интернетом</string>
+    <string name="TechnicalProblemsMessage">Технические проблемы</string>
 </resources>

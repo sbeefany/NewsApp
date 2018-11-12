@@ -10,6 +10,7 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.annotations.Nullable;
 
 public class NewsItem {
+
     @Nullable
     private String title;
     @Nullable
@@ -19,21 +20,19 @@ public class NewsItem {
     @Nullable
     private String publishDate;
     @Nullable
-    private String previewText;
-    @NonNull
-    private String fullText;
+    private String text;
     @NonNull
     private String url;
     @NonNull
     private int id;
-    public NewsItem (@NonNull Result dtoNewsModel) {
+    public NewsItem (@NonNull Result dtoNewsModel,@NonNull String category) {
         String image = null;
         id = new Random().nextInt();
         url = dtoNewsModel.getUrl();
         title = dtoNewsModel.getTitle();
-        category = dtoNewsModel.getSubsection();
+        this.category = category;
         publishDate = dtoNewsModel.getPublishedDate();
-        previewText = dtoNewsModel.get_abstract();
+        text = dtoNewsModel.get_abstract();
         for (Multimedia multimedia : dtoNewsModel.getMultimedia()) {
             if ( multimedia.getFormat().equals("Normal") )
                 image = multimedia.getUrl();
@@ -46,17 +45,8 @@ public class NewsItem {
         title = dbModel.getTitle();
         category = dbModel.getCategory();
         publishDate = dbModel.getDate();
-        previewText = dbModel.getShortDescription();
-        fullText = dbModel.getFullDescription();
+        text = dbModel.getText();
         imageUrl = dbModel.getImageUrl();
-    }
-
-    public String getFullText () {
-        return fullText;
-    }
-
-    public void setFullText (String fullText) {
-        this.fullText = fullText;
     }
 
     public String getUrl () {
@@ -79,12 +69,13 @@ public class NewsItem {
         return publishDate;
     }
 
-    public String getPreviewText () {
-        return previewText;
+    public String getText () {
+        return text;
     }
 
     public int getId () {
         return id;
     }
+
 }
 

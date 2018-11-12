@@ -20,11 +20,9 @@ public class DBModel {
     @Nullable
     private String title;
     @Nullable
-    private String fullDescription;
-    @Nullable
     private String date;
     @Nullable
-    private String shortDescription;
+    private String text;
     @Nullable
     private String imageUrl;
     @Nullable
@@ -38,9 +36,8 @@ public class DBModel {
         id = new Random().nextInt();
         category = newsItem.getCategory();
         title = newsItem.getTitle();
-        fullDescription = newsItem.getFullText();
         date = newsItem.getPublishDate();
-        shortDescription = newsItem.getPreviewText();
+        text = newsItem.getText();
         imageUrl = newsItem.getImageUrl();
         url = newsItem.getUrl();
     }
@@ -77,14 +74,6 @@ public class DBModel {
         this.title = title;
     }
 
-    public String getFullDescription () {
-        return fullDescription;
-    }
-
-    public void setFullDescription (String fullDescription) {
-        this.fullDescription = fullDescription;
-    }
-
     public String getDate () {
         return date;
     }
@@ -93,12 +82,12 @@ public class DBModel {
         this.date = date;
     }
 
-    public String getShortDescription () {
-        return shortDescription;
+    public String getText () {
+        return text;
     }
 
-    public void setShortDescription (String shortDescription) {
-        this.shortDescription = shortDescription;
+    public void setText (String text) {
+        this.text = text;
     }
 
     public int getId () {

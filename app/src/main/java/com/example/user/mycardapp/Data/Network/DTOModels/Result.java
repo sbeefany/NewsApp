@@ -7,9 +7,6 @@ import java.util.List;
 
 public class Result {
 
-    @SerializedName("subsection")
-    @Expose
-    private String subsection;
     @SerializedName("title")
     @Expose
     private String title;
@@ -32,14 +29,6 @@ public class Result {
 
     public void setUrl (String url) {
         this.url = url;
-    }
-
-    public String getSubsection () {
-        return subsection;
-    }
-
-    public void setSubsection (String subsection) {
-        this.subsection = subsection;
     }
 
     public String getTitle () {

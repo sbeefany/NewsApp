@@ -5,8 +5,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.user.mycardapp.Data.NewsItem;
-import com.example.user.mycardapp.Domain.NewsInteractor;
-import com.example.user.mycardapp.Domain.NewsInteractorImpl;
+import com.example.user.mycardapp.Domain.NewsInteractor.NewsInteractor;
+import com.example.user.mycardapp.Domain.NewsInteractor.NewsInteractorImpl;
 import com.example.user.mycardapp.Presentation.StateError;
 
 import java.io.IOException;
@@ -75,7 +75,6 @@ public class NewsPresenterImpl implements NewsPresenter {
                                 Log.e("Exception!!!" , throwable.toString());
                                 if (throwable instanceof IOException) {
                                     view.showStateError(StateError.NetworkError);
-                                    view.showMessage(throwable.getMessage());
                                     return;
                                 }
                                 view.showStateError(StateError.ServerError);
@@ -90,6 +89,11 @@ public class NewsPresenterImpl implements NewsPresenter {
                             }
                     );
         }
+    }
+
+    @Override
+    public void clearDataBase () {
+        interactor.clearDataBase();
     }
 
 }

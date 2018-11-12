@@ -38,13 +38,13 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     public void initData (int position , Context context , ArrayList<NewsItem> news) {
         category.setText(news.get(position).getCategory());
         title.setText(news.get(position).getTitle());
-        description.setText(news.get(position).getPreviewText());
+        description.setText(news.get(position).getText());
         date.setText(news.get(position).getPublishDate().toString());
         Glide.with(context).load(news.get(position).getImageUrl()).into(image);
     }
 
     public void setupClickListener (final int position , final Context context , final ArrayList<NewsItem> news) {
-        cardView.setOnClickListener(view -> NewsDetailsActivity.toNewsDetailsActivity(context , news.get(position).getUrl()));
+        cardView.setOnClickListener(view -> NewsDetailsActivity.toNewsDetailsActivity(context , news.get(position).getId()));
     }
 
 }

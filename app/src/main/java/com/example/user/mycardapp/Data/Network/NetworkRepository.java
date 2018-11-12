@@ -18,7 +18,7 @@ public class NetworkRepository implements Repository {
     }
 
     public static synchronized Repository getInstance () {
-        if ( networkRep == null ) {
+        if (networkRep == null) {
             networkRep = new NetworkRepository();
         }
         return networkRep;
@@ -26,12 +26,12 @@ public class NetworkRepository implements Repository {
 
     @Override
     public Observable<NewsItem> getNews (String category) {
-        if ( !cache.containsKey(category) ) {
+        if (!cache.containsKey(category)) {
             cache.put(category , NewsRestApi.getInstance()
                     .getApi()
                     .getNews(category)
                     .flatMap(dtoNewsModel -> Observable.fromIterable(dtoNewsModel.getResults()))
-                    .map(NewsItem::new));
+                    .map(news -> new NewsItem(news , category)));
         }
         return cache.get(category);
     }
