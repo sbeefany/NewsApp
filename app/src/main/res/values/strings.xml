@@ -19,4 +19,5 @@
     <string name="button_text_in_intro">Get Started</string>
     <string name="NetworkErrorMessage">Отсутствует соединение с интернетом</string>
     <string name="TechnicalProblemsMessage">Технические проблемы</string>
+    <string name="image_for_error">image_for_error</string>
 </resources>

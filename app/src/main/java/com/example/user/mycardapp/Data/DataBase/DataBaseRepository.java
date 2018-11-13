@@ -13,6 +13,8 @@ public interface DataBaseRepository extends Repository {
 
     void saveOneNews (NewsItem oneNews);
 
-    void deleteAll();
+    void deleteAll(String category);
+
+    void deleteOneNews(int id);
 
 }

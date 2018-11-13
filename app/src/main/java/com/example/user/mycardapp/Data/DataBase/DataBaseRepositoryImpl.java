@@ -41,8 +41,8 @@ public class DataBaseRepositoryImpl implements DataBaseRepository {
     }
 
     @Override
-    public void deleteAll () {
-        dataBase.newsDao().deleteAll();
+    public void deleteAll (@NonNull String category) {
+        dataBase.newsDao().deleteAllFromOneCategory(category);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.user.mycardapp.Presentation.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -24,6 +25,7 @@ import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter.NewsPrese
 import com.example.user.mycardapp.Presentation.Presenter.NewsPresenter.NewsView;
 import com.example.user.mycardapp.Presentation.StateError;
 import com.example.user.mycardapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     private Button reload;
     private Categories category;
     private Spinner categories;
+    private FloatingActionButton floatingActionButton;
 
     public static void toNewsListActivity (Activity activity) {
         Intent intent = new Intent(activity , NewsListActivity.class);
@@ -59,9 +62,13 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         presenter = NewsPresenterImpl.createPresenter(getApplicationContext());
         presenter.attachView(this);
         presenter.init();
-        reload.setOnClickListener(view->{
+
+        reload.setOnClickListener(view -> {
             presenter.clearDataBase();
-            presenter.getNews(category.toString(),false);
+            presenter.getNews(category.toString() , false);
+        });
+        floatingActionButton.setOnClickListener(view -> {
+            presenter.getNews(category.toString() , false);
         });
     }
 
@@ -126,8 +133,10 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         recyclerView = findViewById(R.id.news_list);
         badSmile = findViewById(R.id.bad_smile);
         reload = findViewById(R.id.try_reload);
+        floatingActionButton = findViewById(R.id.load_data_button);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void showStateError (@NonNull StateError error) {
         switch ( error ) {
@@ -136,6 +145,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);
                 categories.setVisibility(View.GONE);
+                floatingActionButton.setVisibility(View.GONE);
                 showMessage(getString(R.string.TechnicalProblemsMessage));
                 break;
             }
@@ -144,6 +154,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);
                 categories.setVisibility(View.GONE);
+                floatingActionButton.setVisibility(View.GONE);
                 showMessage(getString(R.string.NetworkErrorMessage));
                 break;
             }
@@ -156,8 +167,10 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         Toast.makeText(this , message , Toast.LENGTH_LONG).show();
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void loadNews (@NonNull List<NewsItem> news) {
+        floatingActionButton.setVisibility(View.VISIBLE);
         badSmile.setVisibility(View.GONE);
         reload.setVisibility(View.GONE);
         categories.setVisibility(View.VISIBLE);

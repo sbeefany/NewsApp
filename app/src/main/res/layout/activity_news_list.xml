@@ -5,13 +5,26 @@
     android:layout_height="match_parent"
     tools:context=".Presentation.Activity.NewsListActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/load_data_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/stat_sys_download"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/outside_margin"
+        android:background="@color/text_icons"
+        tools:ignore="RtlHardcoded" />
+
     <ImageView
         android:id="@+id/bad_smile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:src="@drawable/ic_sad_smile"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:contentDescription="@string/image_for_error" />
 
     <Button
         android:id="@+id/try_reload"
