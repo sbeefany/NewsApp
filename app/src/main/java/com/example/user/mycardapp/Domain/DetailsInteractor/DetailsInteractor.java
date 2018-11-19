@@ -6,4 +6,6 @@ public interface DetailsInteractor {
 
     NewsItem getDetailsAboutOneNews(int id);
 
+    void deleteNews(int id);
+
 }

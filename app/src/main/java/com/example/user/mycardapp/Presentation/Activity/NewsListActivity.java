@@ -58,7 +58,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
             category = !savedInstanceState.getString(getString(R.string.categories_key_for_bundle)).isEmpty() ?
                     Categories.valueOf(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))) :
-                    Categories.HOME;
+                    Categories.Home;
         }
         setContentView(R.layout.activity_news_list);
         presenter = NewsPresenterImpl.createPresenter(getApplicationContext());
@@ -71,6 +71,14 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         floatingActionButton.setOnClickListener(view -> {
             presenter.getNews(category.toString() , false);
         });
+    }
+
+    @Override
+    protected void onStart () {
+        super.onStart();
+        if (category != null) {
+            presenter.getNews(category.toString() , true);
+        }
     }
 
     private void initRecycler (@NonNull List<NewsItem> newsItems) {
@@ -148,6 +156,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
                 categories.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 showMessage(getString(R.string.TechnicalProblemsMessage));
+                recyclerView.setVisibility(View.GONE);
                 break;
             }
             case NETWORKERROR: {
@@ -157,6 +166,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
                 categories.setVisibility(View.GONE);
                 floatingActionButton.setVisibility(View.GONE);
                 showMessage(getString(R.string.NetworkErrorMessage));
+                recyclerView.setVisibility(View.GONE);
                 break;
             }
             default:
@@ -171,6 +181,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     @SuppressLint("RestrictedApi")
     @Override
     public void loadNews (@NonNull List<NewsItem> news) {
+        recyclerView.setVisibility(View.VISIBLE);
         floatingActionButton.setVisibility(View.VISIBLE);
         badSmile.setVisibility(View.GONE);
         reload.setVisibility(View.GONE);

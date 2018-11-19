@@ -23,8 +23,7 @@ public class Result {
     @Expose
     private String url;
 
-    public Result (String subsection , String title , String _abstract , String publishedDate , List<Multimedia> multimedia , String url) {
-        this.subsection = subsection;
+    public Result (String title , String _abstract , String publishedDate , List<Multimedia> multimedia , String url) {
         this.title = title;
         this._abstract = _abstract;
         this.publishedDate = publishedDate;

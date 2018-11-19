@@ -1,9 +1,13 @@
 package com.example.user.mycardapp.Presentation.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -73,7 +77,27 @@ public class NewsDetailsActivity extends AppCompatActivity implements DetailsVie
         titleTextView.setText(newsItem.getTitle());
         descriptionTextView.setText(newsItem.getText());
         dateTextView.setText(newsItem.getPublishDate());
-        initToolBar(newsItem.getCategory());
+        if (newsItem.getCategory() != null) {
+            initToolBar(newsItem.getCategory());
+        } else {
+            initToolBar("Details");
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_details , menu);
+        MenuItem item = menu.findItem(R.id.delete);
+        Button delete = ( Button ) item.getActionView();
+        delete.setBackgroundColor(R.color.lightPrimaryColor);
+        delete.setText(getString(R.string.delete));
+        delete.setTextColor(R.color.text_icons);
+        delete.setOnClickListener(view -> {
+            presenter.deleteNews(getIntent().getIntExtra("id" , 0));
+            onBackPressed();
+        });
+        return true;
     }
 
     @Override
@@ -81,4 +105,5 @@ public class NewsDetailsActivity extends AppCompatActivity implements DetailsVie
         presenter.detachView();
         super.onDestroy();
     }
+
 }

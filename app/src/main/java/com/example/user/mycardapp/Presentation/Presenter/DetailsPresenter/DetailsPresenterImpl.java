@@ -39,4 +39,9 @@ public class DetailsPresenterImpl implements DetailsPresenter {
     public void detachView () {
         view=null;
     }
+
+    @Override
+    public void deleteNews (int id) {
+        detailsInteractor.deleteNews(id);
+    }
 }

@@ -6,6 +6,9 @@ import com.example.user.mycardapp.Data.Network.DTOModels.Result;
 
 import java.util.Random;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 
 public class NewsItem {
 
@@ -63,7 +66,7 @@ public class NewsItem {
     }
 
     @Nullable
-    public Category getCategory () {
+    public String getCategory () {
         return category;
     }
 
@@ -73,8 +76,8 @@ public class NewsItem {
     }
 
     @Nullable
-    public String getPreviewText () {
-        return previewText;
+    public String getText () {
+        return text;
     }
 
     @NonNull
@@ -82,9 +85,9 @@ public class NewsItem {
     public String toString () {
         return "Url:" + getUrl()
                 + " Title:" + getTitle()
-                + " PreviewText:" + getPreviewText()
+                + " PreviewText:" + getText()
                 + " PublishDate:" + getPublishDate()
-                + " Category:" + getCategory().getName()
+                + " Category:" + getCategory()
                 + " ImageUrl:" + getUrl();
     }
     public int getId () {
@@ -101,7 +104,7 @@ public class NewsItem {
         return newsItem.getUrl().equals(getUrl()) &&
                 newsItem.getCategory().equals(getCategory()) &&
                 newsItem.getPublishDate().equals(getPublishDate()) &&
-                newsItem.getPreviewText().equals(getPreviewText()) &&
+                newsItem.getText().equals(getText()) &&
                 newsItem.getTitle().equals(getTitle()) &&
                 newsItem.getImageUrl().equals(getImageUrl());
 
@@ -114,8 +117,8 @@ public class NewsItem {
             result = 31 * result + getImageUrl().hashCode();
         if (getTitle() != null)
             result = 31 * result + getTitle().hashCode();
-        if (getPreviewText() != null)
-            result = 31 * result + getPreviewText().hashCode();
+        if (getText() != null)
+            result = 31 * result + getText().hashCode();
         if (getPublishDate() != null)
             result = 31 * result + getPublishDate().hashCode();
         if (getCategory() != null)

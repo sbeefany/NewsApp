@@ -18,4 +18,9 @@ public class DetailsInteractorImpl implements DetailsInteractor {
         return dataBaseRepository.getOneNews(id);
     }
 
+    @Override
+    public void deleteNews (int id) {
+        dataBaseRepository.deleteOneNews(id);
+    }
+
 }

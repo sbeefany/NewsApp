@@ -11,6 +11,7 @@ import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
 
 public class DataBaseRepositoryImpl implements DataBaseRepository {
+
     private static DataBaseRepository instance;
     private NewsDataBase dataBase;
 
@@ -47,7 +48,7 @@ public class DataBaseRepositoryImpl implements DataBaseRepository {
 
     @Override
     public void deleteOneNews (int id) {
-
+        dataBase.newsDao().delete(dataBase.newsDao().getNewsById(id));
     }
 
     @Override
@@ -64,6 +65,6 @@ public class DataBaseRepositoryImpl implements DataBaseRepository {
                 ) {
             dbModels.add(new DBModel(item));
         }
-        return dbModels.toArray(new DBModel[dbModels.size()]);
+        return dbModels.toArray(new DBModel[items.size()]);
     }
 }

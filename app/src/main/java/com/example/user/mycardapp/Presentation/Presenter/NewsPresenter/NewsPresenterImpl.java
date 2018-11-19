@@ -11,7 +11,6 @@ import com.example.user.mycardapp.Presentation.StateError;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import io.reactivex.Observable;
@@ -24,21 +23,14 @@ public class NewsPresenterImpl implements NewsPresenter {
     private Disposable disposable;
     private NewsView view;
     private NewsInteractor interactor;
-    private Context context;
 
     private NewsPresenterImpl (Context context) {
         interactor = new NewsInteractorImpl(context);
     }
 
-<<<<<<< HEAD:app/src/main/java/com/example/user/mycardapp/Presentation/Presenter/NewsPresenter/NewsPresenterImpl.java
     public static NewsPresenter createPresenter (Context context) {
         if (presenter == null) {
             presenter = new NewsPresenterImpl(context);
-=======
-    public static NewsPresenter createPresenter () {
-        if (presenter == null) {
-            presenter = new NewsPresenterImpl();
->>>>>>> hw4:app/src/main/java/com/example/user/mycardapp/Presentation/Presenter/NewsPresenterImpl.java
         }
         return presenter;
     }
@@ -70,17 +62,10 @@ public class NewsPresenterImpl implements NewsPresenter {
 
     @SuppressLint("CheckResult")
     @Override
-<<<<<<< HEAD:app/src/main/java/com/example/user/mycardapp/Presentation/Presenter/NewsPresenter/NewsPresenterImpl.java
     public void getNews (String category , Boolean fromDataBase) {
         Observable<NewsItem> observable = interactor.getAllNews(category , fromDataBase);
         if (view != null) {
             ArrayList<NewsItem> newsItems = new ArrayList<>();
-=======
-    public void getNews (String category) {
-        Observable<NewsItem> observable = interactor.getAllNews(category);
-        if (view != null) {
-            List<NewsItem> newsItems = new ArrayList<>();
->>>>>>> hw4:app/src/main/java/com/example/user/mycardapp/Presentation/Presenter/NewsPresenterImpl.java
             disposable = observable
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
@@ -88,12 +73,7 @@ public class NewsPresenterImpl implements NewsPresenter {
                             throwable -> {
                                 Log.e("Exception!!!" , throwable.toString());
                                 if (throwable instanceof IOException) {
-<<<<<<< HEAD:app/src/main/java/com/example/user/mycardapp/Presentation/Presenter/NewsPresenter/NewsPresenterImpl.java
-                                    view.showStateError(StateError.NetworkError);
-=======
                                     view.showStateError(StateError.NETWORKERROR);
-                                    view.showMessage(throwable.getMessage());
->>>>>>> hw4:app/src/main/java/com/example/user/mycardapp/Presentation/Presenter/NewsPresenterImpl.java
                                     return;
                                 }
                                 view.showStateError(StateError.SERVERERROR);
