@@ -9,7 +9,7 @@ public interface NewsInteractor {
 
     Observable<NewsItem> getAllNews (@NonNull String category,@NonNull Boolean fromDataBase);
 
-    void clearDataBase();
+    void clearDataBase(String category);
 
 }
 

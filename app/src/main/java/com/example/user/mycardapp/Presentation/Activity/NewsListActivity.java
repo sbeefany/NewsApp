@@ -64,7 +64,6 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         presenter.init();
 
         reload.setOnClickListener(view -> {
-            presenter.clearDataBase();
             presenter.getNews(category.toString() , false);
         });
         floatingActionButton.setOnClickListener(view -> {

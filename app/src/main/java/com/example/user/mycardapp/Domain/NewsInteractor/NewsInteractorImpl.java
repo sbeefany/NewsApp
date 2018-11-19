@@ -35,6 +35,7 @@ public class NewsInteractorImpl implements NewsInteractor {
             return networkRepository.getNews(category)
                     .toList()
                     .doOnSuccess(newsItems -> {
+                        dataBaseRepository.deleteAll(category);
                         dataBaseRepository.saveAllNews(newsItems , category);
                     })
                     .toObservable()
@@ -44,7 +45,7 @@ public class NewsInteractorImpl implements NewsInteractor {
     }
 
     @Override
-    public void clearDataBase () {
-        dataBaseRepository.deleteAll();
+    public void clearDataBase (String category) {
+        dataBaseRepository.deleteAll(category);
     }
 }

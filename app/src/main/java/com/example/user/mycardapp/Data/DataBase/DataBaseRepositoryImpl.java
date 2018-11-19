@@ -46,6 +46,11 @@ public class DataBaseRepositoryImpl implements DataBaseRepository {
     }
 
     @Override
+    public void deleteOneNews (int id) {
+
+    }
+
+    @Override
     public Observable<NewsItem> getNews (String category) {
         return dataBase.newsDao().getAllNews(category)
                 .toObservable()

@@ -63,7 +63,7 @@ public class NewsPresenterImpl implements NewsPresenter {
 
     @SuppressLint("CheckResult")
     @Override
-    public void getNews (String category,Boolean fromDataBase) {
+    public void getNews (String category , Boolean fromDataBase) {
         Observable<NewsItem> observable = interactor.getAllNews(category , fromDataBase);
         if (view != null) {
             ArrayList<NewsItem> newsItems = new ArrayList<>();
@@ -81,7 +81,7 @@ public class NewsPresenterImpl implements NewsPresenter {
                             } ,
                             () -> {
                                 if (newsItems.size() == 0)
-                                    getNews(category,false);
+                                    getNews(category , false);
                                 else {
                                     view.finishLoading();
                                     view.loadNews(newsItems);
@@ -92,8 +92,8 @@ public class NewsPresenterImpl implements NewsPresenter {
     }
 
     @Override
-    public void clearDataBase () {
-        interactor.clearDataBase();
+    public void clearDataBase (String category) {
+        interactor.clearDataBase(category);
     }
 
 }

@@ -33,7 +33,7 @@ public class DBModel {
     }
 
     public DBModel (NewsItem newsItem) {
-        id = new Random().nextInt();
+        id = newsItem.getId();
         category = newsItem.getCategory();
         title = newsItem.getTitle();
         date = newsItem.getPublishDate();

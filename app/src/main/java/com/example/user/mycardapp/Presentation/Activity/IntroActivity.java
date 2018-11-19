@@ -15,13 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class IntroActivity extends AppCompatActivity implements IntroView {
     private IntroPresenter presenter;
     private SharedPreferences sharedPreferences;
-    private Button get_started;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
         sharedPreferences = getSharedPreferences("counter" , MODE_PRIVATE);
-        get_started=findViewById(R.id.button_get_started);
+        Button get_started = findViewById(R.id.button_get_started);
         presenter = IntroPresenterImpl.getInstance();
         presenter.attachView(this);
         presenter.showIntro(getCountFropSharedPref());
@@ -41,7 +41,7 @@ public class IntroActivity extends AppCompatActivity implements IntroView {
     private void saveCount (int count) {
         SharedPreferences.Editor editor=sharedPreferences.edit();
         editor.putInt("counter" , count);
-        editor.commit();
+        editor.apply();
     }
 
     @Override
