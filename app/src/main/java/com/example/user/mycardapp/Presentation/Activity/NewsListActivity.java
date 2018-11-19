@@ -56,7 +56,9 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-            category = Categories.valueOf(savedInstanceState.getString("spinnerState"));
+            category = !savedInstanceState.getString(getString(R.string.categories_key_for_bundle)).isEmpty() ?
+                    Categories.valueOf(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))) :
+                    Categories.HOME;
         }
         setContentView(R.layout.activity_news_list);
         presenter = NewsPresenterImpl.createPresenter(getApplicationContext());
@@ -105,7 +107,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         });
         categories.setAdapter(adapter);
         if (category != null) {
-            Log.d("positionItem" , adapter.getPosition(category) + "");
+            Log.d("positionItem" , String.valueOf(adapter.getPosition(category)));
             categories.setSelection(adapter.getPosition(category));
         }
         return true;
@@ -113,7 +115,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
 
     @Override
     protected void onSaveInstanceState (Bundle outState) {
-        outState.putString("spinnerState" , category.toString());
+        outState.putString(getString(R.string.categories_key_for_bundle) , category.toString());
         Log.d("It's save method" , category.toString());
         super.onSaveInstanceState(outState);
     }
@@ -139,7 +141,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     @Override
     public void showStateError (@NonNull StateError error) {
         switch ( error ) {
-            case ServerError: {
+            case SERVERERROR: {
                 finishLoading();
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);
@@ -148,7 +150,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
                 showMessage(getString(R.string.TechnicalProblemsMessage));
                 break;
             }
-            case NetworkError: {
+            case NETWORKERROR: {
                 finishLoading();
                 badSmile.setVisibility(View.VISIBLE);
                 reload.setVisibility(View.VISIBLE);

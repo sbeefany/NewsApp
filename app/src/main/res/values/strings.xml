@@ -20,4 +20,6 @@
     <string name="NetworkErrorMessage">Отсутствует соединение с интернетом</string>
     <string name="TechnicalProblemsMessage">Технические проблемы</string>
     <string name="image_for_error">image_for_error</string>
+    <string name="categories_key_for_bundle">spinnerState</string>
+    <string name="Title_for_detail">Detail</string>
 </resources>

@@ -23,11 +23,12 @@ public class Result {
     @Expose
     private String url;
 
-    public String getUrl () {
-        return url;
-    }
-
-    public void setUrl (String url) {
+    public Result (String subsection , String title , String _abstract , String publishedDate , List<Multimedia> multimedia , String url) {
+        this.subsection = subsection;
+        this.title = title;
+        this._abstract = _abstract;
+        this.publishedDate = publishedDate;
+        this.multimedia = multimedia;
         this.url = url;
     }
 
@@ -35,31 +36,20 @@ public class Result {
         return title;
     }
 
-    public void setTitle (String title) {
-        this.title = title;
-    }
-
     public String get_abstract () {
         return _abstract;
-    }
-
-    public void set_abstract (String _abstract) {
-        this._abstract = _abstract;
     }
 
     public String getPublishedDate () {
         return publishedDate;
     }
 
-    public void setPublishedDate (String publishedDate) {
-        this.publishedDate = publishedDate;
-    }
-
     public List<Multimedia> getMultimedia () {
         return multimedia;
     }
 
-    public void setMultimedia (List<Multimedia> multimedia) {
-        this.multimedia = multimedia;
+    public String getUrl () {
+        return url;
     }
+
 }
