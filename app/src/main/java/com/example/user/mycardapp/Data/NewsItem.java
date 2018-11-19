@@ -26,7 +26,8 @@ public class NewsItem {
     private String url;
     @NonNull
     private int id;
-    public NewsItem (@NonNull Result dtoNewsModel,@NonNull String category) {
+
+    public NewsItem (@NonNull Result dtoNewsModel , @NonNull String category) {
         String image = null;
         id = new Random().nextInt();
         url = dtoNewsModel.getUrl();
@@ -40,6 +41,7 @@ public class NewsItem {
         }
         this.imageUrl = image;
     }
+
     public NewsItem (@NonNull DBModel dbModel) {
         id = dbModel.getId();
         url = dbModel.getUrl();
@@ -90,6 +92,7 @@ public class NewsItem {
                 + " Category:" + getCategory()
                 + " ImageUrl:" + getUrl();
     }
+
     public int getId () {
         return id;
     }

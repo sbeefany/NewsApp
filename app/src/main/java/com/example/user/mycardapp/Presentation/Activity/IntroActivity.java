@@ -26,20 +26,20 @@ public class IntroActivity extends AppCompatActivity implements IntroView {
         presenter.attachView(this);
         presenter.showIntro(getCountFropSharedPref());
 
-        get_started.setOnClickListener(view->{
+        get_started.setOnClickListener(view -> {
             presenter.clickedGetStarted();
         });
     }
 
     @Override
     public void toNewsActivity () {
-        saveCount(getCountFropSharedPref()+1);
+        saveCount(getCountFropSharedPref() + 1);
         NewsListActivity.toNewsListActivity(this);
     }
 
     @SuppressLint("CommitPrefEdits")
     private void saveCount (int count) {
-        SharedPreferences.Editor editor=sharedPreferences.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("counter" , count);
         editor.apply();
     }

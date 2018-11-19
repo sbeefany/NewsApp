@@ -2,8 +2,6 @@ package com.example.user.mycardapp.Data.DataBase;
 
 import com.example.user.mycardapp.Data.NewsItem;
 
-import java.util.Random;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.Entity;

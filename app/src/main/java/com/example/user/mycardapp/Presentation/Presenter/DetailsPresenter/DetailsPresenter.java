@@ -8,5 +8,6 @@ public interface DetailsPresenter {
 
     void detachView ();
 
-    void deleteNews(int id);
+    void deleteNews (int id);
+
 }

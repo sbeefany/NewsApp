@@ -4,8 +4,8 @@ import com.example.user.mycardapp.Data.NewsItem;
 
 public interface DetailsInteractor {
 
-    NewsItem getDetailsAboutOneNews(int id);
+    NewsItem getDetailsAboutOneNews (int id);
 
-    void deleteNews(int id);
+    void deleteNews (int id);
 
 }

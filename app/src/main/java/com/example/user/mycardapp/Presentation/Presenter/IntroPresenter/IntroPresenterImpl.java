@@ -12,7 +12,7 @@ public class IntroPresenterImpl implements IntroPresenter {
     }
 
     public static synchronized IntroPresenter getInstance () {
-        if ( instance == null ) {
+        if (instance == null) {
             instance = new IntroPresenterImpl();
         }
         return instance;
@@ -20,8 +20,8 @@ public class IntroPresenterImpl implements IntroPresenter {
 
     @Override
     public void showIntro (int count) {
-        if ( view != null ) {
-            if ( count % 2 == 0 )
+        if (view != null) {
+            if (count % 2 == 0)
                 view.toNewsActivity();
             else
                 view.showIntro();
@@ -31,7 +31,7 @@ public class IntroPresenterImpl implements IntroPresenter {
 
     @Override
     public void clickedGetStarted () {
-        if ( view != null )
+        if (view != null)
             view.toNewsActivity();
     }
 
@@ -42,7 +42,7 @@ public class IntroPresenterImpl implements IntroPresenter {
 
     @Override
     public void finish () {
-        if ( view != null ) {
+        if (view != null) {
             view = null;
         }
     }

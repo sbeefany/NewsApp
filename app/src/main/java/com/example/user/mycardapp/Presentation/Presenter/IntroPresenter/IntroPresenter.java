@@ -4,12 +4,12 @@ import androidx.annotation.NonNull;
 
 public interface IntroPresenter {
 
-   void showIntro(int count);
+    void showIntro (int count);
 
-   void clickedGetStarted();
+    void clickedGetStarted ();
 
-   void attachView(@NonNull IntroView view);
+    void attachView (@NonNull IntroView view);
 
-   void finish();
+    void finish ();
 
 }

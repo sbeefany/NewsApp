@@ -12,6 +12,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 @Database(entities = {DBModel.class}, version = 1)
 public abstract class NewsDataBase extends RoomDatabase {
+
     private static final String DATABASE_NAME = "NewsRoomDataBase.db";
     private static NewsDataBase instance;
 
@@ -44,4 +45,5 @@ public abstract class NewsDataBase extends RoomDatabase {
     public void clearAllTables () {
 
     }
+
 }

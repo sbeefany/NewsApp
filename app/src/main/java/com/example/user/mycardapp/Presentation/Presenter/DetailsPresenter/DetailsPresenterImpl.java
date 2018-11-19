@@ -6,6 +6,7 @@ import com.example.user.mycardapp.Domain.DetailsInteractor.DetailsInteractor;
 import com.example.user.mycardapp.Domain.DetailsInteractor.DetailsInteractorImpl;
 
 public class DetailsPresenterImpl implements DetailsPresenter {
+
     private static DetailsPresenter instance;
     private DetailsView view;
     private DetailsInteractor detailsInteractor;
@@ -37,7 +38,7 @@ public class DetailsPresenterImpl implements DetailsPresenter {
 
     @Override
     public void detachView () {
-        view=null;
+        view = null;
     }
 
     @Override
