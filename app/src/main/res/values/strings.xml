@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AboutActivity</string>
+    <string name="app_name">NYapp</string>
     <string name="send_message_btn">Send Message</string>
     <string name="example_name">Имя:Александр</string>
     <string name="example_mood">Характер:экстраверт</string>
@@ -14,4 +14,13 @@
     <string name="vk">vk</string>
     <string name="twitter">twitter</string>
     <string name="poster_for_news">Постер</string>
+    <string name="reload">reload</string>
+    <string name="intro_text">Welcome!</string>
+    <string name="button_text_in_intro">Get Started</string>
+    <string name="NetworkErrorMessage">Отсутствует соединение с интернетом</string>
+    <string name="TechnicalProblemsMessage">Технические проблемы</string>
+    <string name="image_for_error">image_for_error</string>
+    <string name="categories_key_for_bundle">spinnerState</string>
+    <string name="Title_for_detail">Detail</string>
+    <string name="delete">Delete</string>
 </resources>

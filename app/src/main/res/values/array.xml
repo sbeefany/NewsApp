@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="categories">
+        <item>
+            <string-array name="home">
+                <item name="id">1</item>
+                <item name="title">home</item>
+            </string-array>
+        </item>
+        <item>
+            <string-array name="opinion">
+                <item name="id">2</item>
+                <item name="title">opinion</item>
+            </string-array>
+        </item>
+        <item>
+            <string-array name="national">
+                <item name="id">3</item>
+                <item name="title">national</item>
+            </string-array>
+        </item>
+        <item>
+            <string-array name="politics">
+                <item name="id">4</item>
+                <item name="title">politics</item>
+            </string-array>
+        </item>
+        <item>
+            <string-array name="technology">
+                <item name="id">5</item>
+                <item name="title">technology</item>
+            </string-array>
+        </item>
+        <item>
+            <string-array name="travel">
+                <item name="id">6</item>
+                <item name="title">technology</item>
+            </string-array>
+        </item>
+    </array>
+</resources>

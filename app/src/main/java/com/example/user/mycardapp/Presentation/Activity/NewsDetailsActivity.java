@@ -1,40 +1,41 @@
 package com.example.user.mycardapp.Presentation.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.user.mycardapp.Data.NewsItem;
+import com.example.user.mycardapp.Presentation.Presenter.DetailsPresenter.DetailsPresenter;
+import com.example.user.mycardapp.Presentation.Presenter.DetailsPresenter.DetailsPresenterImpl;
+import com.example.user.mycardapp.Presentation.Presenter.DetailsPresenter.DetailsView;
 import com.example.user.mycardapp.R;
 
-import java.util.Date;
 import java.util.Objects;
 
-public class NewsDetailsActivity extends AppCompatActivity {
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-    private String title;
-    private String description;
-    private Date date;
+public class NewsDetailsActivity extends AppCompatActivity implements DetailsView {
+
     private ImageView image;
     private TextView titleTextView;
     private TextView dateTextView;
     private TextView descriptionTextView;
-    private String imageUrl;
-    private String category;
+    private DetailsPresenter presenter;
+    private ConstraintLayout parentView;
 
-    public static void toNewsDetailsActivity (@NonNull Context context , @NonNull String imageUrl ,
-                                              @NonNull String category , @NonNull String title ,
-                                              @NonNull String description , @NonNull Date date) {
+    public static void toNewsDetailsActivity (@NonNull Context context , @NonNull int id) {
         Intent intent = new Intent(context , NewsDetailsActivity.class);
-        intent.putExtra("imageUrl" , imageUrl);
-        intent.putExtra("category" , category);
-        intent.putExtra("title" , title);
-        intent.putExtra("description" , description);
-        intent.putExtra("date" , date);
+        intent.putExtra("id" , id);
         context.startActivity(intent);
     }
 
@@ -42,18 +43,10 @@ public class NewsDetailsActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_details);
-        getDataFromIntent();
-        initToolBar();
         initViews();
-        dataToView();
-    }
-
-    private void getDataFromIntent () {
-        imageUrl = getIntent().getStringExtra("imageUrl");
-        category = getIntent().getStringExtra("category");
-        title = getIntent().getStringExtra("title");
-        description = getIntent().getStringExtra("description");
-        date = ( Date ) getIntent().getSerializableExtra("date");
+        presenter = DetailsPresenterImpl.getInstance(this);
+        presenter.attachView(this);
+        presenter.getData(getIntent().getIntExtra("id" , 0));
     }
 
     private void initViews () {
@@ -61,17 +54,56 @@ public class NewsDetailsActivity extends AppCompatActivity {
         titleTextView = findViewById(R.id.title);
         descriptionTextView = findViewById(R.id.description);
         dateTextView = findViewById(R.id.date);
+        parentView = findViewById(R.id.detailsParentView);
     }
 
-    private void dataToView () {
-        Glide.with(this).load(imageUrl).into(image);
-        titleTextView.setText(title);
-        descriptionTextView.setText(description);
-        dateTextView.setText(date.toString());
-    }
-
-    private void initToolBar () {
+    private void initToolBar (@NonNull String category) {
         Objects.requireNonNull(getSupportActionBar()).setTitle(category);
+    }
+
+    @Override
+    public void startLoading () {
+        parentView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void stopLoading () {
+        parentView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showResults (@NonNull NewsItem newsItem) {
+        Glide.with(this).load(newsItem.getImageUrl()).into(image);
+        titleTextView.setText(newsItem.getTitle());
+        descriptionTextView.setText(newsItem.getText());
+        dateTextView.setText(newsItem.getPublishDate());
+        if (newsItem.getCategory() != null) {
+            initToolBar(newsItem.getCategory());
+        } else {
+            initToolBar("Details");
+        }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_details , menu);
+        MenuItem item = menu.findItem(R.id.delete);
+        Button delete = ( Button ) item.getActionView();
+        delete.setBackgroundColor(R.color.lightPrimaryColor);
+        delete.setText(getString(R.string.delete));
+        delete.setTextColor(R.color.text_icons);
+        delete.setOnClickListener(view -> {
+            presenter.deleteNews(getIntent().getIntExtra("id" , 0));
+            onBackPressed();
+        });
+        return true;
+    }
+
+    @Override
+    protected void onDestroy () {
+        presenter.detachView();
+        super.onDestroy();
     }
 
 }

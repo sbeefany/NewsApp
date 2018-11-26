@@ -1,9 +1,6 @@
 package com.example.user.mycardapp.Presentation.ViewHolder;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +11,10 @@ import com.example.user.mycardapp.Presentation.Activity.NewsDetailsActivity;
 import com.example.user.mycardapp.R;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
@@ -35,17 +36,15 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void initData (int position , Context context , ArrayList<NewsItem> news) {
-        category.setText(news.get(position).getCategory().getName());
+        category.setText(news.get(position).getCategory());
         title.setText(news.get(position).getTitle());
-        description.setText(news.get(position).getPreviewText());
+        description.setText(news.get(position).getText());
         date.setText(news.get(position).getPublishDate().toString());
         Glide.with(context).load(news.get(position).getImageUrl()).into(image);
     }
 
     public void setupClickListener (final int position , final Context context , final ArrayList<NewsItem> news) {
-        cardView.setOnClickListener(view -> NewsDetailsActivity.toNewsDetailsActivity(context , news.get(position).getImageUrl() ,
-                news.get(position).getCategory().getName() , news.get(position).getTitle() ,
-                news.get(position).getFullText() , news.get(position).getPublishDate()));
+        cardView.setOnClickListener(view -> NewsDetailsActivity.toNewsDetailsActivity(context , news.get(position).getId()));
     }
 
 }

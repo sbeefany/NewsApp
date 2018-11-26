@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/outside_margin">
+    android:layout_margin="@dimen/outside_margin"
+    >
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/lightPrimaryColor">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:layout_margin="@dimen/half_standart_margin"
+            android:layout_margin="@dimen/half_standard_margin"
             android:adjustViewBounds="true"
             android:contentDescription="@string/poster_for_news"
             android:scaleType="centerCrop"
@@ -28,9 +30,10 @@
             android:id="@+id/date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/half_standart_margin"
+            android:layout_margin="@dimen/half_standard_margin"
             android:maxLines="1"
             android:textSize="@dimen/text_size"
+            android:textColor="@color/primary_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/image"
             app:layout_constraintHorizontal_bias="0.0"
@@ -42,13 +45,14 @@
             android:id="@+id/description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/half_standart_margin"
-            android:layout_marginLeft="@dimen/half_standart_margin"
-            android:layout_marginRight="@dimen/half_standart_margin"
-            android:layout_marginStart="@dimen/half_standart_margin"
-            android:layout_marginTop="@dimen/half_standart_margin"
+            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_marginLeft="@dimen/half_standard_margin"
+            android:layout_marginTop="@dimen/half_standard_margin"
+            android:layout_marginEnd="@dimen/half_standard_margin"
+            android:layout_marginRight="@dimen/half_standard_margin"
             android:maxLines="4"
             android:textSize="@dimen/text_size"
+            android:textColor="@color/primary_text"
             app:layout_constraintEnd_toStartOf="@+id/image"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,11 +63,12 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/half_standart_margin"
-            android:layout_marginLeft="@dimen/half_standart_margin"
-            android:layout_marginRight="@dimen/half_standart_margin"
-            android:layout_marginStart="@dimen/half_standart_margin"
-            android:layout_marginTop="@dimen/half_standart_margin"
+            android:textColor="@color/primary_text"
+            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_marginLeft="@dimen/half_standard_margin"
+            android:layout_marginTop="@dimen/half_standard_margin"
+            android:layout_marginEnd="@dimen/half_standard_margin"
+            android:layout_marginRight="@dimen/half_standard_margin"
             android:maxLines="1"
             android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toStartOf="@+id/image"
@@ -76,15 +81,16 @@
             android:id="@+id/category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/half_standart_margin"
-            android:layout_marginStart="@dimen/half_standart_margin"
-            android:layout_marginTop="@dimen/half_standart_margin"
+            android:textColor="@color/primary_text"
+            android:layout_marginStart="@dimen/half_standard_margin"
+            android:layout_marginLeft="@dimen/half_standard_margin"
+            android:layout_marginTop="@dimen/half_standard_margin"
             android:maxLines="1"
             android:textSize="@dimen/text_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlHardcoded"
             tools:text="@tools:sample/cities" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

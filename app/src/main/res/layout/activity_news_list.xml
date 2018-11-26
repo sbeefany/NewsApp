@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Presentation.Activity.NewsListActivity">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/load_data_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/outside_margin"
+        android:src="@android:drawable/stat_sys_download"  />
+
+    <ImageView
+        android:id="@+id/bad_smile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_sad_smile"
+        android:visibility="gone"
+        android:contentDescription="@string/image_for_error" />
+
+    <Button
+        android:id="@+id/try_reload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bad_smile"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/margin_between_components"
+        android:text="@string/reload"
+        android:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -11,13 +40,13 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/news_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/half_standart_margin"
+        android:layout_margin="@dimen/half_standard_margin"
         android:orientation="vertical" />
 
 </RelativeLayout>

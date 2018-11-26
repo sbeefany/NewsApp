@@ -1,8 +1,6 @@
 package com.example.user.mycardapp.Presentation.Adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +10,9 @@ import com.example.user.mycardapp.Presentation.ViewHolder.NewsViewHolder;
 import com.example.user.mycardapp.R;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Adapter extends RecyclerView.Adapter<NewsViewHolder> {
 
@@ -27,8 +28,7 @@ public class Adapter extends RecyclerView.Adapter<NewsViewHolder> {
     @Override
     public NewsViewHolder onCreateViewHolder (@NonNull ViewGroup viewGroup , int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_item , viewGroup , false);
-        NewsViewHolder viewHolder = new NewsViewHolder(view);
-        return viewHolder;
+        return new NewsViewHolder(view);
     }
 
     @Override
