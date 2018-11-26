@@ -7,7 +7,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.user.mycardapp.Data.NewsItem;
-import com.example.user.mycardapp.Presentation.Activity.NewsDetailsActivity;
+import com.example.user.mycardapp.Presentation.Activity.MainActivityOfApp;
+import com.example.user.mycardapp.Presentation.Fragments.NewsDetailsFragment;
 import com.example.user.mycardapp.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,12 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void setupClickListener (final int position , final Context context , final ArrayList<NewsItem> news) {
-        cardView.setOnClickListener(view -> NewsDetailsActivity.toNewsDetailsActivity(context , news.get(position).getId()));
+        cardView.setOnClickListener(view -> {
+            if (context instanceof MainActivityOfApp) {
+                MainActivityOfApp activity = ( MainActivityOfApp ) context;
+                activity.changeFragment(NewsDetailsFragment.newInstanse(news.get(position).getId()));
+            }
+        });
     }
 
 }

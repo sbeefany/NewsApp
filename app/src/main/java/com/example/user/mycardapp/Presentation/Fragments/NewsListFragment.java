@@ -1,14 +1,13 @@
-package com.example.user.mycardapp.Presentation.Activity;
+package com.example.user.mycardapp.Presentation.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,14 +28,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class NewsListActivity extends AppCompatActivity implements NewsView {
+public class NewsListFragment extends Fragment implements NewsView {
 
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
@@ -47,59 +48,23 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     private Spinner categories;
     private FloatingActionButton floatingActionButton;
 
-    public static void toNewsListActivity (Activity activity) {
-        Intent intent = new Intent(activity , NewsListActivity.class);
-        activity.startActivity(intent);
-    }
-
+    @Nullable
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView (@NonNull LayoutInflater inflater , @Nullable ViewGroup container , @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_news_list , container , false);
+        initViews(view);
         if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-            category = !savedInstanceState.getString(getString(R.string.categories_key_for_bundle)).isEmpty() ?
+            category = !Objects.requireNonNull(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))).isEmpty() ?
                     Categories.valueOf(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))) :
                     Categories.Home;
         }
-        setContentView(R.layout.activity_news_list);
-        presenter = NewsPresenterImpl.createPresenter(getApplicationContext());
+        presenter = NewsPresenterImpl.createPresenter(getContext());
         presenter.attachView(this);
         presenter.init();
-
-        reload.setOnClickListener(view -> {
-            presenter.getNews(category.toString() , false);
-        });
-        floatingActionButton.setOnClickListener(view -> {
-            presenter.getNews(category.toString() , false);
-        });
-    }
-
-    @Override
-    protected void onStart () {
-        super.onStart();
-        if (category != null) {
-            presenter.getNews(category.toString() , true);
-        }
-    }
-
-    private void initRecycler (@NonNull List<NewsItem> newsItems) {
-        Adapter adapter = new Adapter(( ArrayList<NewsItem> ) newsItems , this);
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-            recyclerView.setLayoutManager(layoutManager);
-        } else {
-            GridLayoutManager layoutManager = new GridLayoutManager(this , 2);
-            recyclerView.setLayoutManager(layoutManager);
-        }
-        recyclerView.setAdapter(adapter);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu (Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_option , menu);
-        MenuItem item = menu.findItem(R.id.spinner);
-        categories = ( Spinner ) item.getActionView();
+        categories = Objects.requireNonNull(getActivity()).findViewById(R.id.spinner);
+        categories.setVisibility(View.VISIBLE);
         ArrayAdapter<Categories> adapter = new ArrayAdapter<>(
-                this , android.R.layout.simple_list_item_1 , Categories.values());
+                Objects.requireNonNull(getContext()) , android.R.layout.simple_list_item_1 , Categories.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -118,11 +83,37 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
             Log.d("positionItem" , String.valueOf(adapter.getPosition(category)));
             categories.setSelection(adapter.getPosition(category));
         }
-        return true;
+        reload.setOnClickListener(view1 -> {
+            presenter.getNews(category.toString() , false);
+        });
+        floatingActionButton.setOnClickListener(view1 -> {
+            presenter.getNews(category.toString() , false);
+        });
+        return view;
     }
 
     @Override
-    protected void onSaveInstanceState (Bundle outState) {
+    public void onStart () {
+        super.onStart();
+        if (category != null) {
+            presenter.getNews(category.toString() , true);
+        }
+    }
+
+    private void initRecycler (@NonNull List<NewsItem> newsItems) {
+        Adapter adapter = new Adapter(( ArrayList<NewsItem> ) newsItems , getContext());
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+        } else {
+            GridLayoutManager layoutManager = new GridLayoutManager(getContext() , 2);
+            recyclerView.setLayoutManager(layoutManager);
+        }
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onSaveInstanceState (@NonNull Bundle outState) {
         outState.putString(getString(R.string.categories_key_for_bundle) , category.toString());
         Log.d("It's save method" , category.toString());
         super.onSaveInstanceState(outState);
@@ -136,13 +127,12 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
         }
     }
 
-    @Override
-    public void initViews () {
-        progressBar = findViewById(R.id.progress_bar);
-        recyclerView = findViewById(R.id.news_list);
-        badSmile = findViewById(R.id.bad_smile);
-        reload = findViewById(R.id.try_reload);
-        floatingActionButton = findViewById(R.id.load_data_button);
+    private void initViews (View view) {
+        progressBar = view.findViewById(R.id.progress_bar);
+        recyclerView = view.findViewById(R.id.news_list);
+        badSmile = view.findViewById(R.id.bad_smile);
+        reload = view.findViewById(R.id.try_reload);
+        floatingActionButton = view.findViewById(R.id.load_data_button);
     }
 
     @SuppressLint("RestrictedApi")
@@ -175,7 +165,7 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     }
 
     private void showMessage (@NonNull String message) {
-        Toast.makeText(this , message , Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext() , message , Toast.LENGTH_LONG).show();
     }
 
     @SuppressLint("RestrictedApi")
@@ -202,10 +192,11 @@ public class NewsListActivity extends AppCompatActivity implements NewsView {
     }
 
     @Override
-    protected void onDestroy () {
+    public void onStop () {
         presenter.finish();
         presenter.detachView();
-        super.onDestroy();
+        categories.setVisibility(View.GONE);
+        super.onStop();
     }
 
 }

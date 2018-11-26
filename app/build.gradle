@@ -27,7 +27,7 @@ ext.versionRetrofit = '2.4.0'
 ext.versionOkHttpLogingInterceptor = '3.6.0'
 ext.versionGlide = '4.8.0'
 ext.versionAppCompat = '1.0.0'
-ext.versionRoom='2.1.0-alpha02'
+ext.versionRoom = '2.1.0-alpha02'
 
 
 dependencies {
@@ -46,8 +46,11 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$versionOkHttpLogingInterceptor"
 
     implementation "androidx.room:room-runtime:$versionRoom"
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
     annotationProcessor "androidx.room:room-compiler:$versionRoom"
     implementation "androidx.room:room-rxjava2:2.0.0-rc01"
+
+    implementation 'me.relex:circleindicator:2.1.0'
 
     implementation "com.github.bumptech.glide:glide:$versionGlide"
     annotationProcessor "com.github.bumptech.glide:compiler:$versionGlide"

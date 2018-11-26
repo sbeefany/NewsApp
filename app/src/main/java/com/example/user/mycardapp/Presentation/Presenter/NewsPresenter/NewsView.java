@@ -15,8 +15,6 @@ public interface NewsView {
 
     void finishLoading ();
 
-    void initViews ();
-
     void showStateError (@NonNull StateError error);
 
 }

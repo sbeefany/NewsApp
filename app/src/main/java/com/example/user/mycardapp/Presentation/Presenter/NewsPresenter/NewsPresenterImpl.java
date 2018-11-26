@@ -39,7 +39,6 @@ public class NewsPresenterImpl implements NewsPresenter {
     public void init () {
         Log.d("View" , view.toString());
         if (view != null) {
-            view.initViews();
             view.startLoading();
         }
     }
