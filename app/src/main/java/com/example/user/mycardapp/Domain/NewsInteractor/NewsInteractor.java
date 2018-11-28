@@ -7,9 +7,9 @@ import io.reactivex.Observable;
 
 public interface NewsInteractor {
 
-    Observable<NewsItem> getAllNews (@NonNull String category,@NonNull Boolean fromDataBase);
+    Observable<NewsItem> getAllNews (@NonNull String category);
 
-    void clearDataBase(String category);
+    void clearDataBase (String category);
 
 }
 

@@ -1,6 +1,8 @@
-package com.example.user.mycardapp.Data.DataBase;
+package com.example.user.mycardapp.Data.DataSource;
 
 import android.content.Context;
+
+import com.example.user.mycardapp.Data.DataSource.DTOModels.DBModel;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -18,9 +20,7 @@ public abstract class NewsDataBase extends RoomDatabase {
 
     public synchronized static NewsDataBase getInstance (Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context.getApplicationContext() ,
-                    NewsDataBase.class ,
-                    DATABASE_NAME)
+            instance = Room.databaseBuilder(context.getApplicationContext() , NewsDataBase.class , DATABASE_NAME)
                     .allowMainThreadQueries()
                     .build();
         }

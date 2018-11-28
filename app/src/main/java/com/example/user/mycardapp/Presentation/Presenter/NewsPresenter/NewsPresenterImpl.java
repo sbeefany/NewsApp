@@ -60,8 +60,8 @@ public class NewsPresenterImpl implements NewsPresenter {
 
     @SuppressLint("CheckResult")
     @Override
-    public void getNews (String category , Boolean fromDataBase) {
-        Observable<NewsItem> observable = interactor.getAllNews(category , fromDataBase);
+    public void getNews (String category) {
+        Observable<NewsItem> observable = interactor.getAllNews(category);
         if (view != null) {
             ArrayList<NewsItem> newsItems = new ArrayList<>();
             disposable = observable
@@ -69,7 +69,7 @@ public class NewsPresenterImpl implements NewsPresenter {
                     .subscribe(
                             newsItems::add ,
                             throwable -> {
-                                Log.e("Exception!!!" , throwable.toString());
+                                Log.e("NEWS_PRESENTER" , throwable.toString());
                                 if (throwable instanceof IOException) {
                                     view.showStateError(StateError.NETWORKERROR);
                                     return;
@@ -77,20 +77,11 @@ public class NewsPresenterImpl implements NewsPresenter {
                                 view.showStateError(StateError.SERVERERROR);
                             } ,
                             () -> {
-                                if (newsItems.size() == 0)
-                                    getNews(category , false);
-                                else {
-                                    view.finishLoading();
-                                    view.loadNews(newsItems);
-                                }
+                                view.finishLoading();
+                                view.loadNews(newsItems);
                             }
                     );
         }
-    }
-
-    @Override
-    public void clearDataBase (String category) {
-        interactor.clearDataBase(category);
     }
 
 }

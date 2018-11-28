@@ -1,4 +1,4 @@
-package com.example.user.mycardapp.Data.DataBase;
+package com.example.user.mycardapp.Data.DataSource.DTOModels;
 
 import com.example.user.mycardapp.Data.NewsItem;
 

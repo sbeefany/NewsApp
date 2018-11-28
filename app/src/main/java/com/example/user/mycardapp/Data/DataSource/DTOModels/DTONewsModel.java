@@ -1,4 +1,4 @@
-package com.example.user.mycardapp.Data.Network.DTOModels;
+package com.example.user.mycardapp.Data.DataSource.DTOModels;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

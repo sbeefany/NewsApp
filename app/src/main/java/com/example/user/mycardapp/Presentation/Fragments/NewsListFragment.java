@@ -52,23 +52,17 @@ public class NewsListFragment extends Fragment implements NewsView {
         View view = inflater.inflate(R.layout.activity_news_list , container , false);
         initViews(view);
         if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-            category = !Objects.requireNonNull(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))).isEmpty() ?
-                    Categories.valueOf(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))) :
-                    Categories.Home;
+            category = initCategory(savedInstanceState);
         }
         presenter = NewsPresenterImpl.createPresenter(getContext());
         presenter.attachView(this);
         presenter.init();
-        categories = Objects.requireNonNull(getActivity()).findViewById(R.id.spinner);
-        categories.setVisibility(View.VISIBLE);
-        ArrayAdapter<Categories> adapter = new ArrayAdapter<>(
-                Objects.requireNonNull(getContext()) , android.R.layout.simple_list_item_1 , Categories.values());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         categories.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected (AdapterView<?> adapterView , View view , int i , long l) {
                 category = Categories.values()[i];
-                presenter.getNews(category.toString() , true);
+                presenter.getNews(category.toString());
             }
 
             @Override
@@ -76,25 +70,27 @@ public class NewsListFragment extends Fragment implements NewsView {
                 //nothing
             }
         });
-        categories.setAdapter(adapter);
-        if (category != null) {
-            Log.d("positionItem" , String.valueOf(adapter.getPosition(category)));
-            categories.setSelection(adapter.getPosition(category));
-        }
+
         reload.setOnClickListener(view1 -> {
-            presenter.getNews(category.toString() , false);
+            presenter.getNews(category.toString());
         });
         floatingActionButton.setOnClickListener(view1 -> {
-            presenter.getNews(category.toString() , false);
+            presenter.getNews(category.toString());
         });
         return view;
+    }
+
+    private Categories initCategory (@NonNull Bundle savedInstanceState) {
+        return !Objects.requireNonNull(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))).isEmpty() ?
+                Categories.valueOf(savedInstanceState.getString(getString(R.string.categories_key_for_bundle))) :
+                Categories.Home;
     }
 
     @Override
     public void onStart () {
         super.onStart();
         if (category != null) {
-            presenter.getNews(category.toString() , true);
+            presenter.getNews(category.toString());
         }
     }
 
@@ -121,11 +117,25 @@ public class NewsListFragment extends Fragment implements NewsView {
     }
 
     private void initViews (View view) {
+        categories = Objects.requireNonNull(getActivity()).findViewById(R.id.spinner);
         progressBar = view.findViewById(R.id.progress_bar);
         recyclerView = view.findViewById(R.id.news_list);
         badSmile = view.findViewById(R.id.bad_smile);
         reload = view.findViewById(R.id.try_reload);
         floatingActionButton = view.findViewById(R.id.load_data_button);
+        initSpinner();
+    }
+
+    private void initSpinner () {
+        categories.setVisibility(View.VISIBLE);
+        ArrayAdapter<Categories> adapter = new ArrayAdapter<>(
+                Objects.requireNonNull(getContext()) , android.R.layout.simple_list_item_1 , Categories.values());
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categories.setAdapter(adapter);
+        if (category != null) {
+            Log.d("NEWS_LIST_FRAGMENT" , String.valueOf(adapter.getPosition(category)));
+            categories.setSelection(adapter.getPosition(category));
+        }
     }
 
     @SuppressLint("RestrictedApi")

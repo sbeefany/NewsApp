@@ -2,15 +2,15 @@ package com.example.user.mycardapp.Domain.DetailsInteractor;
 
 import android.content.Context;
 
-import com.example.user.mycardapp.Data.DataBase.DataBaseRepository;
-import com.example.user.mycardapp.Data.DataBase.DataBaseRepositoryImpl;
+import com.example.user.mycardapp.Data.DataSource.NetworkRepository;
 import com.example.user.mycardapp.Data.NewsItem;
+import com.example.user.mycardapp.Data.Repository;
 
 public class DetailsInteractorImpl implements DetailsInteractor {
-    private DataBaseRepository dataBaseRepository;
+    private Repository dataBaseRepository;
 
     public DetailsInteractorImpl (Context context) {
-        dataBaseRepository = DataBaseRepositoryImpl.getInstance(context);
+        dataBaseRepository = NetworkRepository.getInstance(context);
     }
 
     @Override

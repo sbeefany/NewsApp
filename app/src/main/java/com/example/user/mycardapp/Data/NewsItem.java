@@ -1,8 +1,8 @@
 package com.example.user.mycardapp.Data;
 
-import com.example.user.mycardapp.Data.DataBase.DBModel;
-import com.example.user.mycardapp.Data.Network.DTOModels.Multimedia;
-import com.example.user.mycardapp.Data.Network.DTOModels.Result;
+import com.example.user.mycardapp.Data.DataSource.DTOModels.DBModel;
+import com.example.user.mycardapp.Data.DataSource.DTOModels.Multimedia;
+import com.example.user.mycardapp.Data.DataSource.DTOModels.Result;
 
 import java.util.Random;
 

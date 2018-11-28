@@ -12,8 +12,6 @@ public interface NewsPresenter {
 
     void finish ();
 
-    void getNews (String category , Boolean fromDataBase);
-
-    void clearDataBase (String category);
+    void getNews (String category);
 
 }

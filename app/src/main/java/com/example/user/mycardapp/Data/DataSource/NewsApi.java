@@ -1,6 +1,6 @@
-package com.example.user.mycardapp.Data.Network;
+package com.example.user.mycardapp.Data.DataSource;
 
-import com.example.user.mycardapp.Data.Network.DTOModels.DTONewsModel;
+import com.example.user.mycardapp.Data.DataSource.DTOModels.DTONewsModel;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

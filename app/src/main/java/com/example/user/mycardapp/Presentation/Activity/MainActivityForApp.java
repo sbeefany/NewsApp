@@ -13,12 +13,13 @@ import com.example.user.mycardapp.R;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import io.reactivex.annotations.NonNull;
 
 public class MainActivityForApp extends AppCompatActivity implements MainActivityOfApp {
     private FragmentManager fragmentManager;
     private FrameLayout firstConteiner;
     private FrameLayout secondConteiner;
-    private boolean isMainMenu = false;
+    private static boolean isMainMenu = false;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class MainActivityForApp extends AppCompatActivity implements MainActivit
             fragmentManager.beginTransaction()
                     .replace(R.id.conteiner , new IntroMainFragment())
                     .commit();
+        }else{
+            initViewAccordinOrientation(getResources().getConfiguration());
         }
     }
 
@@ -39,37 +42,36 @@ public class MainActivityForApp extends AppCompatActivity implements MainActivit
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             if (fragment instanceof NewsListFragment) {
-                isMainMenu=true;
-                fragmentManager.beginTransaction()
-                        .replace(R.id.land_conteiner , fragment)
-                        .commit();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.conteiner , new EmptyFragment())
-                        .commit();
+                isMainMenu = true;
+                replaceFragment(fragment , R.id.land_conteiner , false);
+                replaceFragment(new EmptyFragment() , R.id.conteiner , false);
             } else {
-                fragmentManager.beginTransaction()
-                        .replace(R.id.conteiner , fragment)
-                        .addToBackStack(null)
-                        .commit();
-                isMainMenu=false;
+                replaceFragment(fragment , R.id.conteiner , true);
+                isMainMenu = false;
             }
         } else {
             if (fragment instanceof NewsListFragment) {
                 isMainMenu = true;
-                firstConteiner.setVisibility(View.GONE);
-                secondConteiner.setVisibility(View.VISIBLE);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.land_conteiner , fragment)
-                        .commit();
+                replaceFragment(fragment , R.id.land_conteiner , false);
+                showMenu();
             } else {
                 isMainMenu = false;
-                secondConteiner.setVisibility(View.GONE);
-                firstConteiner.setVisibility(View.VISIBLE);
-                fragmentManager.beginTransaction()
-                        .replace(R.id.conteiner , fragment)
-                        .addToBackStack(null)
-                        .commit();
+                replaceFragment(fragment , R.id.conteiner , true);
+                showDetail();
             }
+        }
+    }
+
+    private void replaceFragment (@NonNull Fragment fragment , @NonNull int conteiner , @NonNull boolean doesItToBackStack) {
+        if (doesItToBackStack) {
+            fragmentManager.beginTransaction()
+                    .replace(conteiner , fragment)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            fragmentManager.beginTransaction()
+                    .replace(conteiner , fragment)
+                    .commit();
         }
     }
 
@@ -77,26 +79,42 @@ public class MainActivityForApp extends AppCompatActivity implements MainActivit
     public void onBackPressed () {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT && !isMainMenu) {
             isMainMenu = true;
-            firstConteiner.setVisibility(View.GONE);
-            secondConteiner.setVisibility(View.VISIBLE);
+            showMenu();
+        }
+        if(isMainMenu){
+            finish();
         }
         super.onBackPressed();
     }
 
-    @Override
-    public void onConfigurationChanged (Configuration newConfig) {
+    private void initViewAccordinOrientation (Configuration newConfig) {
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
+            if (isMainMenu && fragmentManager.getBackStackEntryCount() == 0) {
+                replaceFragment(new EmptyFragment() , R.id.conteiner , false);
+            }
+            if(!isMainMenu&&fragmentManager.getBackStackEntryCount() == 0){
+                showDetail();
+                return;
+            }
             firstConteiner.setVisibility(View.VISIBLE);
             secondConteiner.setVisibility(View.VISIBLE);
         } else {
             if (!isMainMenu) {
-                secondConteiner.setVisibility(View.GONE);
-                firstConteiner.setVisibility(View.VISIBLE);
+                showDetail();
             } else {
-                secondConteiner.setVisibility(View.VISIBLE);
-                firstConteiner.setVisibility(View.GONE);
+                showMenu();
             }
         }
-        super.onConfigurationChanged(newConfig);
+    }
+
+    private void showDetail () {
+        secondConteiner.setVisibility(View.GONE);
+        firstConteiner.setVisibility(View.VISIBLE);
+    }
+
+    private void showMenu () {
+        secondConteiner.setVisibility(View.VISIBLE);
+        firstConteiner.setVisibility(View.GONE);
     }
 }

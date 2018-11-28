@@ -1,4 +1,6 @@
-package com.example.user.mycardapp.Data.DataBase;
+package com.example.user.mycardapp.Data.DataSource;
+
+import com.example.user.mycardapp.Data.DataSource.DTOModels.DBModel;
 
 import java.util.List;
 
