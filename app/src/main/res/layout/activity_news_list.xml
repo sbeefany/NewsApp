@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
     tools:context=".Presentation.Fragments.NewsListFragment">
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/load_data_button"
         android:layout_width="wrap_content"
@@ -13,7 +15,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/outside_margin"
-        android:src="@android:drawable/stat_sys_download"  />
+        android:src="@android:drawable/stat_sys_download" />
 
     <ImageView
         android:id="@+id/bad_smile"

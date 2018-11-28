@@ -14,6 +14,7 @@ import com.example.user.mycardapp.Presentation.Presenter.DetailsPresenter.Detail
 import com.example.user.mycardapp.Presentation.Presenter.DetailsPresenter.DetailsPresenterImpl;
 import com.example.user.mycardapp.Presentation.Presenter.DetailsPresenter.DetailsView;
 import com.example.user.mycardapp.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
@@ -30,7 +31,7 @@ public class NewsDetailsFragment extends Fragment implements DetailsView {
     private TextView descriptionTextView;
     private DetailsPresenter presenter;
     private ConstraintLayout parentView;
-    private Button deleteButton;
+    private FloatingActionButton deleteButton;
 
     public static NewsDetailsFragment newInstanse (@NonNull int id) {
         NewsDetailsFragment newsDetailsFragment = new NewsDetailsFragment();
@@ -70,7 +71,7 @@ public class NewsDetailsFragment extends Fragment implements DetailsView {
     }
 
     private void initToolBar (@NonNull String category) {
-        Objects.requireNonNull(getActivity().getActionBar()).setTitle(category);
+
     }
 
     @Override

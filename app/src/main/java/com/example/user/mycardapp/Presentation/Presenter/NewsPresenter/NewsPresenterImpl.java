@@ -55,7 +55,6 @@ public class NewsPresenterImpl implements NewsPresenter {
 
     @Override
     public void finish () {
-        view.finishLoading();
         disposable.dispose();
     }
 

@@ -24,4 +24,5 @@
     <string name="Title_for_detail">Detail</string>
     <string name="delete">Delete</string>
     <string name="intro_text_details">Просматривайте подробно!</string>
+    <string name="pick_news">Выбирите новость</string>
 </resources>

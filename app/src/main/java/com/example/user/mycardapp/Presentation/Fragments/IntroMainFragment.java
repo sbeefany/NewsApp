@@ -94,6 +94,7 @@ public class IntroMainFragment extends Fragment implements IntroView {
 
     @Override
     public void onDestroy () {
+        activityOfApp = null;
         presenter.finish();
         super.onDestroy();
     }

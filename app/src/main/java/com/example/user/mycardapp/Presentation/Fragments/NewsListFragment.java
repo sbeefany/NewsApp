@@ -1,7 +1,6 @@
 package com.example.user.mycardapp.Presentation.Fragments;
 
 import android.annotation.SuppressLint;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +32,6 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -102,13 +100,8 @@ public class NewsListFragment extends Fragment implements NewsView {
 
     private void initRecycler (@NonNull List<NewsItem> newsItems) {
         Adapter adapter = new Adapter(( ArrayList<NewsItem> ) newsItems , getContext());
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-            recyclerView.setLayoutManager(layoutManager);
-        } else {
-            GridLayoutManager layoutManager = new GridLayoutManager(getContext() , 2);
-            recyclerView.setLayoutManager(layoutManager);
-        }
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
 
